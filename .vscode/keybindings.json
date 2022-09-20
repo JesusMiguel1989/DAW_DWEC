@@ -1,0 +1,12 @@
+[
+    {
+    "key": "ctrl+alt+f",
+    "command": "workbench.action.tasks.runTask",
+    "args": "Abrir en Firefox"
+    },
+    {
+    "key": "ctrl+alt+c",
+    "command": "workbench.action.tasks.runTask",
+    "args": "Abrir en Chrome"
+    }
+]
