@@ -1,0 +1,62 @@
+.horario{
+    background-color: aquamarine;
+    text-align: center;
+    border: 0ch;
+    width: 500px;
+    font-weight: bold;
+}
+
+.des{
+    text-align: center;
+    background-color: azure;
+    font-weight: bold;
+}
+
+.DAW{
+    text-align: center;
+    background-color:firebrick;
+    font-weight: bold;
+}
+.EIE{
+    text-align: center;
+    background-color:pink;
+    font-weight: bold;
+}
+
+.DWES{
+    text-align: center;
+    background-color:coral;
+    font-weight: bold;
+}
+
+.DWEC{
+    text-align: center;
+    background-color:dodgerblue;
+    font-weight: bold;
+    animation-name: peloteo;
+    animation-duration: 2s;
+    animation:animacion 2s infinite;
+}
+
+.DWI{
+    text-align: center;
+    background-color:hotpink;
+    font-weight: bold;
+}
+
+.desc{
+    background-color: darkgray;
+    
+}
+
+td:hover{
+    background-color: yellowgreen;
+}
+
+@keyframes animacion{
+    20% {background-color: pink; font-family: 'Courier New', Courier, monospace;}
+    40% {background-color: aquamarine; font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;}
+    60% {background-color: green; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;}
+    80% {background-color: yellow; font-family: Arial, Helvetica, sans-serif;}
+    100% {background-color: brown; font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;}
+}

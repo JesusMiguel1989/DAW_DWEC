@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="./CSS/formato.css">
 </head>
 <body>
     <!--Repaso de HTML-->
@@ -58,6 +59,61 @@
             <li>Resoli</li>
         </ol>
     </p>
+
+    <table class="horario" border="1px">
+        <tr>
+            <td  colspan="6">Horario</td>
+        </tr>
+        <tr>
+            <td class="desc"></td>
+            <td class="des">Lunes</td>
+            <td class="des">Martes</td>
+            <td class="des">Miércoles</td>
+            <td class="des">Jueves</td>
+            <td class="des">Viernes</td>
+        </tr>
+        <tr>
+            <td class="des">Primera<br>8:30-9:25</td>
+            <td class="DAW" rowspan="2">DAW</td>
+            <td class="DWES" rowspan="2">DWES</td>
+            <td class="DWEC" rowspan="3">DWEC</td>
+            <td class="DWI" rowspan="2">DWI</td>
+            <td class="DWEC" rowspan="2">DWEC</td>
+        </tr>
+        <tr>
+            <td class="des">Segunda<br>9:25-10:20</td>
+        </tr>
+        <tr>
+            <td class="des">Tercera<br>10:20-11:15</td>
+            <td class="EIE">EIE</td>
+            <td class="DWEC">DWEC</td>
+            
+            <td class="DWES">DWES</td>
+            <td class="DWI">DWI</td>
+        </tr>
+        <tr class="des">
+            <td class="des">Descanso<br>11:15-11:45</td>
+            <td colspan="5" class="desc">DESCANSO</td>
+        </tr>
+        <tr>
+            <td class="des">Cuarta<br>11:45-12:40</td>
+            <td rowspan="3" class="DWES">DWES</td>
+            <td class="DWEC">DWEC</td>
+            <td rowspan="3" class="DAW">DAW</td>
+            <td rowspan="2" class="DWES">DWES</td>
+            <td class="DWI">DWI</td>
+        </tr>
+        <tr>
+            <td class="des">Quinta<br>12:40-13:35</td>
+            <td rowspan="2" class="DWI">DWI</td>
+            <td class="EIE">EIE</td>
+        </tr>
+        <tr>
+            <td class="des">Sexta<br>13:35-14:30</td>
+            <td class="EIE">EIE</td>
+            <td class="DWES">DWES</td>
+        </tr>
+    </table>
 </body>
 </html>
 
