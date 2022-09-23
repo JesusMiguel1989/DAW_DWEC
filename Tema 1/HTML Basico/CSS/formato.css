@@ -4,6 +4,8 @@
     border: 0ch;
     width: 500px;
     font-weight: bold;
+    border-radius: 5%;
+    border: 0px;
 }
 
 .des{
@@ -35,7 +37,7 @@
     font-weight: bold;
     animation-name: peloteo;
     animation-duration: 2s;
-    animation:animacion 2s infinite;
+    animation:peloteo 2s infinite;
 }
 
 .DWI{
@@ -53,7 +55,7 @@ td:hover{
     background-color: yellowgreen;
 }
 
-@keyframes animacion{
+@keyframes peloteo{
     20% {background-color: pink; font-family: 'Courier New', Courier, monospace;}
     40% {background-color: aquamarine; font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;}
     60% {background-color: green; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;}
