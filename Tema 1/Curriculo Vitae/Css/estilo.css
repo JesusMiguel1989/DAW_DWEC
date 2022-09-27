@@ -19,6 +19,8 @@ header{
 }
 nav{
     background: #FFFBB9;
+    align-content: center;
+    justify-content: center;
 }
 aside{
     background: #FFFBB9;
@@ -37,6 +39,8 @@ aside{
 section{
     display:inline;
     position: relative;
+    width: 79%;
+    height: 80%;
     float:left;
     display:inline;
     background:#BDECB6;
@@ -44,11 +48,12 @@ section{
 
 footer{
     position: absolute;
-    bottom: 0;
     width: 100%;
     background:#BDECB6;
-    float:unset;
-    position: absolute;;
+    padding-bottom: 0;
+    float:none;
+    position: relative;
+    clear: both;
 }
 
 
