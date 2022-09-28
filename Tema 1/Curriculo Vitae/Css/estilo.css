@@ -8,52 +8,79 @@ img{
     height: "200px";
 }
 
+body{
+    width: 960px;
+    background-color: azure;
+}
+
 header{
     display: flex;
-    background: #FFFBB9;
-    border: 1px solid #999999;
+    background: azure;
+    border: 0px solid #999999;
     padding: 20px;
     align-content: center;
     justify-content: center;
     border: 10px;
 }
 nav{
-    background: #FFFBB9;
+    background: antiquewhite;
+    align-items: center;
     align-content: center;
     justify-content: center;
+    text-align: center;
+    border:1px solid gray;
 }
 aside{
-    background: #FFFBB9;
-    border: 1px solid #999999;
-    padding: 20px;
-    display:inline;
+    background: rgb(228, 250, 228);
+    border: 2px solid #999999;
+    padding-top: 20px;
+    padding-left: 20px;
+    margin-top: 20px;
+
     align-items: right;
     justify-content: right;
     width:"20%";
-    height: 80%;
-    border: 0cm;
+    min-height: 650px;
+
     float: right;
-    position : relative;
+    border:1px solid gray;
+    font-size: 18px;
+    line-height: 30px;
 }
 
 section{
-    display:inline;
-    position: relative;
-    width: 79%;
+    padding-top:  40px;
+    width: 80%;
     height: 80%;
     float:left;
-    display:inline;
-    background:#BDECB6;
+    min-height: 400px;
+    min-width: 800px;
+    background: azure;
+}
+
+article{
+    background: antiquewhite;
+    border:1px solid #999;
+    padding: 20px;
+    margin-bottom: 15px;
+    line-height: 25px;
+    font-size: 20px;
 }
 
 footer{
+    padding: 10px;
     position: absolute;
     width: 100%;
-    background:#BDECB6;
+    background: antiquewhite;
     padding-bottom: 0;
     float:none;
     position: relative;
     clear: both;
+    min-height: 100px;
+    border:1px solid #999;
+    margin-bottom: 15px;
+    line-height: 25px;
+    font-size: 20px;
 }
 
 
@@ -72,27 +99,12 @@ body {
     margin: 15px auto;
     text-align: left;
 }
-/*
-header,section,footer,aside,nav,article,figure,figcaption,hgroup {
-    display: block;
+
+dd{
+    text-align: right;
 }
 
-
-
-header {
-    background: #FFFBB9;
-    border: 1px solid #999999;
-    padding: 20px;
+img{
+    margin-left: 25px;
 }
-
-nav {
-    background: #CCCCCC;
-    padding: 5px 15px;
-}
-
-nav li {
-    display: inline-block;
-    list-style: none;
-    padding: 5px;
-    font: bold 14px verdana, sans-serif;
-}*/
+/*min-heigth*/

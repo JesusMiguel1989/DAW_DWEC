@@ -1,0 +1,36 @@
+/*h1{
+    color: brown;
+    display: inline-block;
+}
+
+#tercero{
+    position: relative;
+    left: 40px;
+    top: 60px;
+}
+
+#formas{
+    position: fixed;
+    left: 120px;
+    top: 300px;
+    background-color: aqua;
+}
+
+div{
+    position: fixed;
+    left: 50px;
+    top: 50px;
+    width: 500px;
+    height: 100px;
+    background-color: gray;
+}
+
+#segundo{
+    position: absolute;
+    left: 120px;
+    top: 30px;
+    background-color: aqua;
+}*/
+img{
+    float: none;
+}
