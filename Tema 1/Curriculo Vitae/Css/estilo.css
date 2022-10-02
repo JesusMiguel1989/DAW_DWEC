@@ -35,12 +35,12 @@ aside{
     border: 2px solid #999999;
     padding-top: 20px;
     padding-left: 20px;
-    margin-top: 20px;
+    margin-top: 40px;
 
     align-items: right;
     justify-content: right;
     width:"20%";
-    min-height: 650px;
+    min-height: 690px;
 
     float: right;
     border:1px solid gray;
@@ -50,11 +50,11 @@ aside{
 
 section{
     padding-top:  40px;
-    width: 80%;
+    width: 75%;
     height: 80%;
     float:left;
-    min-height: 400px;
-    min-width: 800px;
+    min-height: 50%;
+    min-width: 60%;
     background: azure;
 }
 
