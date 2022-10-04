@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script>
+        /*
+        let num=20;
+        console.log(typeof(num));
+
+        let cadena ="asdf";
+        console.log(isNaN(NaN));
+        console.log(isNaN(num));
+        console.log(isNaN(cadena));
+
+        let mensaje=parseInt (promt("Dime un numero"));
+        //console.log(mensaje/2);
+        if(isNaN(mensaje)){
+            alert("No es un numero");
+        }else{
+            alert("El numero introducido es" + mensaje);
+        }*/
+         let mensaje2;
+        do{
+            mensaje2=prompt("Dime un numero");
+            try{
+                if(isNaN(mensaje2)){
+                    throw new execption();
+                }else{
+                    alert("Es un numero");
+                }
+            }
+            catch(execption){
+                alert("Esto no e sun numero");
+            }
+        }while(isNaN(mensaje2))
+
+    </script>
+
+</head>
+<body>
+    
+</body>
+</html>

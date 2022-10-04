@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        let nuevaVariable=3;
+        const MENSAJE="Hola mundo";
+        if(true){
+            var local1="hola";
+            let local2="caracola";
+            if(true){
+                console.log(local2);
+            }
+        }
+        console.log(local1);
+        //console.log(local2);
+
+        console.log(global1);
+        //console.log(global2); provoca un error porque let no esta declarado previamente
+
+        var global1="Hola mundo2";
+        console.log(global1);
+        let global2="Hola mundo let";
+        console.log(global2);
+
+        let variable1 ="Hola";
+        let variable2 = 25;
+        let variable3 = "25";
+        let variable4 = new Date();
+        let variable5;
+        let variable6= ()=>{};
+        let variable7=true;
+        let variable8= variable4;
+        let variable9 = null;
+        console.log("el tipo de variable 1 es :" + typeof(variable1) + " y contiene " + variable1);
+        console.log("el tipo de variable 2 es :" + typeof(variable2) + " y contiene " + variable2);
+        console.log("el tipo de variable 3 es :" + typeof(variable3) + " y contiene " + variable3);
+        console.log("el tipo de variable 4 es :" + typeof(variable4) + " y contiene " + variable4);
+        console.log("el tipo de variable 5 es :" + typeof(variable5) + " y contiene " + variable5);
+        console.log("el tipo de variable 6 es :" + typeof(variable6) + " y contiene " + variable6);
+        console.log("el tipo de variable 7 es :" + typeof(variable7) + " y contiene " + variable7);
+        console.log("el tipo de variable 8 es :" + typeof(variable8) + " y contiene " + variable8);
+        console.log("el tipo de variable 9 es :" + typeof(variable9) + " y contiene " + variable9);
+        
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
