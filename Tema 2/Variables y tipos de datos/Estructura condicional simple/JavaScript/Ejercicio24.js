@@ -8,7 +8,7 @@ do {
         alert("no has metido numeros, vuelve a intentarlo")
     }
     precio = parseInt(prompt("Dime el precio de las horas"));
-}while(isNaN(horas) && isNaN(precio))
+}while(isNaN(horas) && isNaN(precio) && horas>0 && precio>0)
 
 calculo=horas-40;
 if(calculo>0){
