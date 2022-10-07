@@ -8,7 +8,7 @@ do {
     }
 } while (isNaN(numero) && numero > 0 && numero % 2 != 0)
 
-for (let i = numero; i > 0; i -= 2) {
+for (let i = 1; i <= numero; i += 2) {
     for (let k = 0; k < (numero - i) / 2; k++) {
         cad = cad + '&nbsp';
     }
