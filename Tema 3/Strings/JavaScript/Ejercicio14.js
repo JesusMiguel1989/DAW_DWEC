@@ -38,7 +38,7 @@ do{
 }while (!isNaN(caracter2) || longitud!=1);
 
 texto=texto.replaceAll(caracter,caracter2);
-
+ 
 
 alert("Tras la evolucion tu frase quedo: \n"+texto);
 document.write("Tras la evolucion tu frase quedo: <br>"+texto);

@@ -7,7 +7,7 @@ Var startTime=new Date();
 While (new Date() – startTime <=500);
 */
 
-var texto = "", caracter = "", texto2 = ""; //string
+var texto = ""; //string
 var longitud;//numerico
 
 //pedimos y exigimos que es un texto1
