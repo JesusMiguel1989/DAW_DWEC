@@ -33,3 +33,5 @@ for (let j = 0; j < 20; j++) {
     //texto2="";
     console.clear();
 }
+//substr(pos inicial, [longitud que quiero]);
+//slice(posicion inicial al infinito);
