@@ -49,6 +49,7 @@ num1 = Math.floor(Math.random() * (5 - 1) + 1);
 pc.innerHTML = "<img src='./imagenes/" + num1 + ".png'>";
 total = num1 + numero;
 
+//calculas el resultado
 if (total % 2 == 0) {
     if (eleccion == "pares") {
         //alert("gana el jugador");
@@ -66,4 +67,5 @@ if (total % 2 == 0) {
         resultado = "error";
     }
 }
+//muestras el resultado
 marcador.innerHTML = "<img src='./imagenes/" + resultado + ".png'>";
