@@ -17,41 +17,53 @@ let num1;//numerica
 
 //variables programa
 let total;//numerica
-let jugador,pc,marcador;//variables para la imprsion de la imagen
-jugador=document.getElementById("jugador");
-pc=document.getElementById("pc");
-marcador=document.getElementById("marcador");
+let resultado;//string
+let jugador, pc, marcador;//variables para la imprsion de la imagen
 
+jugador = document.getElementById("jugador");
+pc = document.getElementById("pc");
+marcador = document.getElementById("marcador");
 
+//pido un numero
 do {
-    numero = parseInt(prompt("Cuantos dedos sacas"));
+    numero = prompt("Cuantos dedos sacas");
     if (isNaN(numero)) {
         alert("No me has dado un numero");
     }
-    if (numero<1 && numero>5) {
+    if (numero < 1 && numero > 5) {
         alert("Me has dado un numero BIEN\n pero recuerda que tiene que ser del1 al 5\n Vuelve a probar");
     }
-}while(numero<=0 && numero>=6);
 
+} while (numero <= 0 || numero >= 6 || isNaN(numero));
+parseInt(numero);
+jugador.innerHTML = "<img src='./imagenes/" + numero + ".png'>";
+
+//pides pares o impares
 do {
     eleccion = prompt("Dime que quieres\nPares\nnones");
     eleccion.toLowerCase();
 } while (eleccion != "pares" && eleccion != "nones");
 
-num1=Math.floor(Math.random()*(5-1)+1);
+//calculas el numero de la maquina
+num1 = Math.floor(Math.random() * (5 - 1) + 1);
+pc.innerHTML = "<img src='./imagenes/" + num1 + ".png'>";
+total = num1 + numero;
 
-total=num1+numero;
-
-if(total%2==0){
-    if(eleccion=="pares"){
-        alert("gana el jugador");
-    }else{
-        alert("Gana la maquina");
+if (total % 2 == 0) {
+    if (eleccion == "pares") {
+        //alert("gana el jugador");
+        resultado = "acierto";
+    } else {
+        //alert("Gana la maquina");
+        resultado = "error";
     }
-}else{
-    if(eleccion=="nones"){
-        alert("Gana el jugador");
-    }else{
-        alert("Gana la maquina");
+} else {
+    if (eleccion == "nones") {
+        //alert("Gana el jugador");
+        resultado = "acierto";
+    } else {
+        //alert("Gana la maquina");
+        resultado = "error";
     }
 }
+marcador.innerHTML = "<img src='./imagenes/" + resultado + ".png'>";
