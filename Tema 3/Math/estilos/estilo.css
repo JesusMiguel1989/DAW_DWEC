@@ -1,10 +1,23 @@
 table{
     border: 2px solid black;
+    border-radius: 5%;
 }
 
 td{
     border: 1px solid black;
     margin: 0 auto;
+    font-size: 30px;
+    color: black;
+    background-color: blanchedalmond;
+    align-items: center;
+    text-align: center;
+}
+
+th{
+    background-color: aqua;
+    color: gray;
+    animation-name: titulo;
+    animation:titulo 2s infinite;
 }
 
 img{
@@ -14,4 +27,14 @@ img{
 
 #marcador{
     text-align: center;
+}
+
+
+
+@keyframes titulo{
+    20% {background-color: pink; }
+    40% {background-color: aquamarine;}
+    60% {background-color: green;}
+    80% {background-color: yellow;}
+    100% {background-color: brown; }
 }

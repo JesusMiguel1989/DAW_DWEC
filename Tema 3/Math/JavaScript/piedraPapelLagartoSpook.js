@@ -83,7 +83,7 @@ if((elejug==1 && elepc==3) || (elejug==1 && elepc==4) ||
     }
 }
 
-if((elejug==1 && elepc==1) || (elejug==2 && elepc==2) || (elejug==3 && elepc==3) || (elejug==4 && elepc==4) || (elejug==5 && elepc==5)){
+if(elejug==elepc){
     resultado = "empate";
 }
 marcador.innerHTML = "<img src='./imagenes/" + resultado + ".png'>";
