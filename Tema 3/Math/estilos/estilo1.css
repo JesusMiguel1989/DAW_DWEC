@@ -3,7 +3,7 @@ table{
     border-radius: 5%;
 }
 
-td{
+.indice{
     border: 1px solid black;
     margin: 0 auto;
     font-size: 30px;
@@ -11,13 +11,14 @@ td{
     background-color: blanchedalmond;
     align-items: center;
     text-align: center;
-}
-
-th{
     background-color: aqua;
     color: gray;
     animation-name: titulo;
     animation:titulo 2s infinite;
+}
+
+.resto{
+    background-color: blanchedalmond;
 }
 
 img{
