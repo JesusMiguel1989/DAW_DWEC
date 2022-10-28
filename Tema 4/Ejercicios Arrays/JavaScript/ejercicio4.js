@@ -11,13 +11,19 @@ let tablas = [];//array que contiene las tablas
 for (i = 0; i <= 10; i++) {
     let fila = [];
     for (j = 0; j <= 10; j++) {
-        
         fila[j] = i * j;
     }
     tablas.push(fila);
 }
 
 for (i = 1; i <= 10; i++) {
-    document.write(tablas[i] + "<br>")
+    for(j=0;j<10;j++){
+        if(tablas[i][j]<10){
+            document.write("0"+tablas[i][j]+"&nbsp&nbsp");
+        }else{
+            document.write(tablas[i][j]+"&nbsp&nbsp");
+        }
+    }
+    document.write("<br>");
 }
 
