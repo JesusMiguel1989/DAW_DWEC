@@ -1,0 +1,11 @@
+#btn1, #btn2, #btn3, #btn4,#btn5, #btn6{
+    border-radius: 3;
+    width: 120px;
+    color: white;
+    background-color: blue;
+}
+
+#txtarea, #texto{
+    color: beige;
+    background-color: black;
+}
