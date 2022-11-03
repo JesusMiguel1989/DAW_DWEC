@@ -1,0 +1,28 @@
+table, tr,td{
+    border: 1px solid black; 
+    padding: 2px;
+}
+
+table{
+    border-radius: 3px;
+    text-align: center;
+}
+
+h1{
+    text-align: center;
+    color: crimson;
+}
+
+#bt1cod ,#bt2des{
+    border-radius: 6px;
+    background-color: bisque;
+    color: blue;
+}
+#bt1cod:hover{
+    background-color: aqua;
+    color: black;
+}
+#bt2des:hover{
+    background-color: aqua;
+    color: black;
+}
