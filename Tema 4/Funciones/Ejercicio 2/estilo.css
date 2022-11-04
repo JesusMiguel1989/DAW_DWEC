@@ -1,6 +1,6 @@
 #letra{
-    font-size: 40px;
-    width: 20px;
+    font-size: 20px;
+    width: 200px;
 }
 
 #btn{
@@ -17,5 +17,5 @@
     font-style: italic;
     font-weight: bold;
     font-size: 20px;
-    width: 100px;
+    width: 300px;
 }

@@ -21,7 +21,7 @@ btn.addEventListener("click",()=>{
     aux=parseInt(numero.value);
 
     //comprobamos si es un numero
-    if(isNaN(aux)){
+    if(isNaN(aux) || aux.length!=8){
         numero.value="lo siento eso no es un numero";
         letra.value="Sigue sin serlo";
     }else{
