@@ -34,14 +34,13 @@ function Personas (n,e){
 }
 
 function asistentesAleatorios(min, max){
-    return Math.floor(Math.random()**(max-min)+min);
+    return Math.floor(Math.random()*(max-min)+min);
 }
 
 let colaPersonas = [];
 let i;//variables del programa
 let totales=asistentesAleatorios(5,50);
-let usuarios = [];
-let recaudado = (0,0,0);
+let usuarios = [0,0,0];
 
 for(i=0;i<totales;i++){
     let nombre="Persona"+i;
@@ -55,15 +54,16 @@ for(i=0;i<totales;i++){
     let caja=colaPersonas.shift();
     let edad=caja.GetEdad();
     if(edad<11){
-        usuarios[0]++;
-        recaudado[0]+=2;
+        usuarios[0]+=1;
     }else{
         if(edad<18){
-            usuarios[1]++;
-            recaudado[1]+=4
+            usuarios[1]+=1;
         }else{
-            usuarios[2]++;
-            recaudado[2]+=6;
+            usuarios[2]+=1;
         }
     }
 }
+
+document.write("Usuario entre los 5 y los 10 son: " + usuarios[0] + " aportan " + usuarios[0]*2 + "€<br>");
+document.write("Usuario entre los 11 y los 17 son: " + usuarios[1] + " aportan " + usuarios[1]*4 + "€<br>");
+document.write("Usuario entre mayores de 18 son : " + usuarios[2] + " aportan " + usuarios[2]*6 + "€<br>");
