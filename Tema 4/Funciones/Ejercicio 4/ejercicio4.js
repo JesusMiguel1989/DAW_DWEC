@@ -66,8 +66,13 @@ function transformarStringBasico(cadena) {
 function codificar(aux, cadena) {
     for (i = 0; i < cadena.length; i++) {
         for (j = 0; j < arrayAbecedario.length; j++) {
+            //por si la clave es mayor de 27
+            while(aux>=27){
+                aux-=27;
+            }
             if (cadena[i] == arrayAbecedario[j]) {
                 if ((j + aux) >= 27) {
+                    //whille
                     codificado[i] = arrayAbecedario[(j + aux) - 27];
                 } else {
                     codificado[i] = arrayAbecedario[(j + aux)];
