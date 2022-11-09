@@ -60,7 +60,7 @@ btnTicket.addEventListener("click",()=>{
     }else{
         for(i=0;i<productos.length;i++){
             aux=productos.shift();
-            cadena+="Producto"+i+"     "+aux.getCantidad()+"\t\t"+aux.getPrecio()+"€\t "+aux.getPrecioFinal().toFixed(2)+"€\n";
+            cadena+="Producto"+i+"     "+aux.getCantidad()+"\t\t"+aux.getPrecio().toFixed(2)+"€\t "+aux.getPrecioFinal().toFixed(2)+"€\n";
             precioFinal+=aux.getPrecioFinal().toFixed(2);
         }
         cadena+="Precio Final\t\t\t\t"+precioFinal+"€";
