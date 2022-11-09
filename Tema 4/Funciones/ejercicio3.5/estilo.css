@@ -1,0 +1,24 @@
+#codigo{
+    background-color: gainsboro;
+    color: blue;
+}
+
+#tarea{
+    background-color: bisque;
+    color: black;
+    font-size: 20px;
+}
+
+#txtArea{
+    background-color: azure;
+}
+
+#btnAñadir, #btnRealizar{
+    border-radius: 6px;
+    background-color: aquamarine;
+}
+
+#btnAñadir:hover, #btnRealizar:hover{
+    background-color: chartreuse;
+    font-weight: bold;
+}
