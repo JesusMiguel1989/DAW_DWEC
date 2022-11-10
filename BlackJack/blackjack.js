@@ -7,6 +7,7 @@ function Carta(num, palo) {
     this.palo = palo;
 
     this.getNumero = () => this.numero;
+    this.getpalo = () => this.palo;
 
     function toString(carta) {
         return "El numero es " + carta.numero + " y su palo es " + carta.palo;
@@ -61,16 +62,14 @@ class Baraja {
         let i;
         let aux;//auxiliar donde se guardara la mano del jugador activo
 
-        if(!turno){
-            aux=this.jugador;
-        }else{
-            aux=this.maquina;
+        if (!turno) {
+            aux = this.jugador;
+        } else {
+            aux = this.maquina;
         }
 
         //calculamos 1 vez la puntuacion
         for (i = 0; i < aux.length; i++) {
-            //***************** */
-            //carta = this.jugador[i][0].getNumero();
             carta = aux[i][0].getNumero();
             if (carta >= 10) {
                 total += 10;
@@ -84,7 +83,8 @@ class Baraja {
         }//for
         //comprobamos que esta por debajo de 21,sino los as pasan a valer 1
         if (total > 21) {
-            for (i = 0; i < cartas; i++) {
+            total = 0;
+            for (i = 0; i < aux.length; i++) {
                 carta = aux[i][0].getNumero();
                 if (carta >= 10) {
                     total += 10;
@@ -96,36 +96,10 @@ class Baraja {
         return total;
     }
 
-    /*valorMaquina() {
-        let total = 0;//puntuacion del jugador
-        let i;
-        let carta;
-        //calculamos 1 vez la puntuacion
-        for (i = 0; i < this.maquina.length; i++) {
-            carta = this.jugador[i][0].getNumero();
-            if (carta >= 10) {
-                total += 10;
-            } else {
-                if (carta = 1) {
-                    total += 11;
-                } else {
-                    total += carta;
-                }
-            }
-        }//for
-        //comprobamos que esta por debajo de 21,sino los as pasan a valer 1
-        if (total > 21) {
-            for (i = 0; i < cartas; i++) {
-                carta = this.jugador[i][0].getNumero();
-                if (carta >= 10) {
-                    total += 10;
-                } else {
-                    total += carta;
-                }
-            }//for
-        }//if si supera los 21, 2 oportunidad
-        return total;
-    }*/
+    //mostrar cartas
+    mostrar(){
+        let cadena="";//cadena donde se guardara el nombre de la carta
+    }
 }
 
 //variables DOM
@@ -133,12 +107,14 @@ let barajar = document.getElementById("barajar");
 let pedir = document.getElementById("pedir");
 let plantarse = document.getElementById("plantarse");
 let comprobar = document.getElementById("comprobar");
+let jugador = document.getElementById("jugador");
+let banca = document.getElementById("banca");
 
 //variables js
 let comprobador = false;//comprobador de que el jugador a barajeado
 let puntuacion = 0, punto = 0;//puntuacion
 let baraja = new Baraja();
-let turno=false;//boleano para saber a quien le damos carta
+let turno = false;//boleano para saber a quien le damos carta
 
 barajar.addEventListener("click", () => {
     baraja.generarBaraja();
@@ -158,25 +134,36 @@ pedir.addEventListener("click", () => {
 });//pedir cartas
 
 plantarse.addEventListener("click", () => {
-    let punto = 0;
-    turno=true;
+
+    turno = true;
     if (!comprobador || punto > 21) {
         document.write("Barajea primero tramposo");
     } else {
-        baraja.extraerMaquina();
-        punto = baraja.valorJugador(turno);
-        //repetir mientras punto <puntuacion
+        while (punto < puntuacion && punto <= 21) {
+            baraja.extraerMaquina();
+            punto = baraja.valorJugador(turno);
+        }
     }
 });//turno de la maquina
 
 comprobar.addEventListener("click", () => {
-    if (puntuacion > punto) {
-        document.write("Gano el jugador");
-    } else {
-        if (puntuacion = punto) {
-            document.write("Empate");
+    if (puntuacion <= 21) {
+        if (punto <= 21) {
+            if (puntuacion > punto && punto <= 21) {
+                document.write("Gano el jugador");
+            } else {
+                if (puntuacion == punto) {
+                    document.write("Empate");
+                } else {
+                    document.write("Gano la Casa");
+                }
+            }
         } else {
-            document.write("Gano la Casa");
+            document.write("Gano el Jugador");
         }
+    } else {
+        document.write("Gano la Banca");
     }
+
+
 });//mostrar ganador
