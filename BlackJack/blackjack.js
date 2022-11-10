@@ -55,15 +55,23 @@ class Baraja {
         this.maquina.push(this.baraja.shift());//extraemos la 1 carta de a baraja y se la damos a la maquina
     }
 
-    valorJugador() {
+    valorJugador(turno) {
         let total = 0;//puntuacion del jugador
         let carta;//objeto carta
         let i;
-        //calculamos 1 vez la puntuacion
-        for (i = 0; i < this.jugador.length; i++) {
-            //***************** */
-            carta = this.jugador[i][0].getNumero();
+        let aux;//auxiliar donde se guardara la mano del jugador activo
 
+        if(!turno){
+            aux=this.jugador;
+        }else{
+            aux=this.maquina;
+        }
+
+        //calculamos 1 vez la puntuacion
+        for (i = 0; i < aux.length; i++) {
+            //***************** */
+            //carta = this.jugador[i][0].getNumero();
+            carta = aux[i][0].getNumero();
             if (carta >= 10) {
                 total += 10;
             } else {
@@ -77,7 +85,7 @@ class Baraja {
         //comprobamos que esta por debajo de 21,sino los as pasan a valer 1
         if (total > 21) {
             for (i = 0; i < cartas; i++) {
-                carta = this.jugador[i][0].getNumero();
+                carta = aux[i][0].getNumero();
                 if (carta >= 10) {
                     total += 10;
                 } else {
@@ -88,7 +96,7 @@ class Baraja {
         return total;
     }
 
-    valorMaquina() {
+    /*valorMaquina() {
         let total = 0;//puntuacion del jugador
         let i;
         let carta;
@@ -117,7 +125,7 @@ class Baraja {
             }//for
         }//if si supera los 21, 2 oportunidad
         return total;
-    }
+    }*/
 }
 
 //variables DOM
@@ -130,6 +138,7 @@ let comprobar = document.getElementById("comprobar");
 let comprobador = false;//comprobador de que el jugador a barajeado
 let puntuacion = 0, punto = 0;//puntuacion
 let baraja = new Baraja();
+let turno=false;//boleano para saber a quien le damos carta
 
 barajar.addEventListener("click", () => {
     baraja.generarBaraja();
@@ -144,17 +153,19 @@ pedir.addEventListener("click", () => {
         document.write("Barajea primero tramposo");
     } else {
         baraja.extraerJugador();
-        puntuacion = baraja.valorJugador();
+        puntuacion = baraja.valorJugador(turno);
     }
 });//pedir cartas
 
 plantarse.addEventListener("click", () => {
     let punto = 0;
+    turno=true;
     if (!comprobador || punto > 21) {
         document.write("Barajea primero tramposo");
     } else {
         baraja.extraerMaquina();
-        punto = baraja.valorMaquina();
+        punto = baraja.valorJugador(turno);
+        //repetir mientras punto <puntuacion
     }
 });//turno de la maquina
 
