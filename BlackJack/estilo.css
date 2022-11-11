@@ -1,0 +1,26 @@
+body{
+    background-image: url("./cartas/mesa\ blackjack.jpeg");
+    background-repeat: no-repeat;
+}
+img{
+    width: 100px;
+    height: 100px;
+}
+#principal{
+    display: inline;
+}
+
+#jugador, #banca{
+    float: left;
+    margin: 50px;
+    padding: 10px;
+    border: 5px solid bisque;
+    margin: 0 auto;
+    text-align: center;
+    align-items: center;
+}
+input{
+    display: block;
+    float: none;
+    border-radius: 5px;
+}

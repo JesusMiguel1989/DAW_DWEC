@@ -97,8 +97,42 @@ class Baraja {
     }
 
     //mostrar cartas
-    mostrar(){
-        let cadena="";//cadena donde se guardara el nombre de la carta
+    mostrar(turno) {
+        let cadena = "";//cadena donde se guardara el nombre de la carta
+        let cadena1="";
+        let aux;//auxiliar donde se guardara la mano del jugador activo
+        let i;//variable programa
+        let variable;
+
+        if (!turno) {
+            aux = this.jugador;
+            variable=document.getElementById("jugador");
+        } else {
+            aux = this.maquina;
+            variable=document.getElementById("banca");
+        }
+
+        for (i = 0; i < aux.length; i++) {
+            switch (aux[i][0].getpalo()) {
+                case 0:
+                    cadena = "Club" + aux[i][0].getNumero() + ".png";
+                    break;
+                case 1:
+                    cadena = "Diamond" + aux[i][0].getNumero() + ".png";
+                    break;
+                case 2:
+                    cadena = "Heart" + aux[i][0].getNumero() + ".png";
+                    break;
+                case 3:
+                    cadena = "Spade" + aux[i][0].getNumero() + ".png";
+                    break;
+            }
+            cadena1+='<img src="./cartas/' + cadena + '">';
+            variable.innerHTML = cadena1;
+            
+        }
+        cadena="";
+        //return cadena;
     }
 }
 
@@ -107,14 +141,14 @@ let barajar = document.getElementById("barajar");
 let pedir = document.getElementById("pedir");
 let plantarse = document.getElementById("plantarse");
 let comprobar = document.getElementById("comprobar");
-let jugador = document.getElementById("jugador");
-let banca = document.getElementById("banca");
+let resultado=document.getElementById("resultado");
 
 //variables js
 let comprobador = false;//comprobador de que el jugador a barajeado
 let puntuacion = 0, punto = 0;//puntuacion
 let baraja = new Baraja();
 let turno = false;//boleano para saber a quien le damos carta
+let cadena = "";//cadena que recoge la imagen
 
 barajar.addEventListener("click", () => {
     baraja.generarBaraja();
@@ -130,11 +164,11 @@ pedir.addEventListener("click", () => {
     } else {
         baraja.extraerJugador();
         puntuacion = baraja.valorJugador(turno);
+        baraja.mostrar(turno);
     }
 });//pedir cartas
 
 plantarse.addEventListener("click", () => {
-
     turno = true;
     if (!comprobador || punto > 21) {
         document.write("Barajea primero tramposo");
@@ -142,6 +176,7 @@ plantarse.addEventListener("click", () => {
         while (punto < puntuacion && punto <= 21) {
             baraja.extraerMaquina();
             punto = baraja.valorJugador(turno);
+            baraja.mostrar(turno);
         }
     }
 });//turno de la maquina
@@ -150,19 +185,19 @@ comprobar.addEventListener("click", () => {
     if (puntuacion <= 21) {
         if (punto <= 21) {
             if (puntuacion > punto && punto <= 21) {
-                document.write("Gano el jugador");
+                resultado.innerHTML="Gano el jugador";
             } else {
                 if (puntuacion == punto) {
-                    document.write("Empate");
+                    resultado.innerHTML="Empate";
                 } else {
-                    document.write("Gano la Casa");
+                    resultado.innerHTML="Gano la Casa";
                 }
             }
         } else {
-            document.write("Gano el Jugador");
+            resultado.innerHTML="Gano el Jugador";
         }
     } else {
-        document.write("Gano la Banca");
+        resultado.innerHTML="Gano la Banca";
     }
 
 

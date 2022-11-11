@@ -58,7 +58,7 @@ btnAñadir.addEventListener("click",(cod,tar)=>{
         txtArea.innerHTML="Uno de los campo es erroneo";
     }else{
         aux=new Tareas(cod,tar);
-        tareas.push(aux);
+        tareas.unshift(aux);
         txtArea.innerHTML=ver(tareas);
     }
 });
@@ -67,7 +67,7 @@ btnRealizar.addEventListener("click",(cod,tar)=>{
     if(tareas.length==0){
         txtArea.innerHTML="No tienes tareas, me extraña";
     }else{
-        aux=tareas.pop();
+        aux=tareas.shift();
         txtArea.innerHTML=ver(tareas);
     }
 })

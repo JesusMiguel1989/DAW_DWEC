@@ -1,19 +1,29 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BLACKJACK</title>
-    <!--<link rel="stylesheet" href="./estilo.css">-->
+    <link rel="stylesheet" href="./estilo.css">
 </head>
+
 <body>
-    Barajear <input type="button" id="barajar" value="Barajear"><br>
-    Pedir carta Jugador <input type="button" id="pedir" value="Pedir"><br>
-    <div id="Jugador"></div>
-    Plantarse <input type="button" id="plantarse" value="plantarse"><br>
-    <div id="banca"></div>
-    Comprobar puntuacion <input type="button" id="comprobar" value="comprobar"><br>
+    <div id="principal">
+        <h1>Jugador</h1>
+        <div id="jugador">
+        </div>
+        <h1>Maquina</h1>
+        <div id="banca">
+        </div>
+    </div>
+    <input type="button" id="barajar" value="Barajear"><br>
+    <input type="button" id="pedir" value="Pedir">
+    <input type="button" id="plantarse" value="plantarse">
+    <input type="button" id="comprobar" value="comprobar"><br>
+    <p id="resultado"></p>
     <script type="text/javascript" src="./blackjack.js"></script>
 </body>
+
 </html>
