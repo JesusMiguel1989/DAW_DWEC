@@ -1,17 +1,22 @@
-body{
-    background-image: url("./cartas/mesa\ blackjack.jpeg");
-    background-repeat: no-repeat;
+body {
+    background-color: rgb(48, 102, 48);
+     text-align: center;
+    /*background: url("./cartas/mesa\ blackjack.jpeg") no-repeat;
+    background-size: 100%;*/
 }
-img{
+
+img {
     width: 100px;
     height: 100px;
 }
-#principal{
-    display: inline;
+
+#principal {
+    display: block;
 }
 
-#jugador, #banca{
-    float: left;
+#jugador,
+#banca {
+    align-items: center;
     margin: 50px;
     padding: 10px;
     border: 5px solid bisque;
@@ -19,8 +24,39 @@ img{
     text-align: center;
     align-items: center;
 }
-input{
-    display: block;
-    float: none;
+
+input {
     border-radius: 5px;
+    width: 100px;
+    height: 50px;
+}
+input:hover{
+    background-color: aquamarine;
+}
+
+#botones{
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+    bottom: 0;
+    width: 100%;
+}
+
+ul li{
+    display:inline;
+    padding:5px;
+    list-style: none;
+}
+
+#resultado{
+    font-size: 50px;
+    animation:titulo 2s infinite;
+}
+
+@keyframes titulo{
+    20% {background-color: pink; color: green; }
+    40% {background-color: aquamarine; color: orange;}
+    60% {background-color: antiquewhite; color: red;}
+    80% {background-color: yellow; color: violet;}
+    100% {background-color: brown; color: grey;}
 }

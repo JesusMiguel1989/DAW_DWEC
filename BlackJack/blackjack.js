@@ -142,6 +142,11 @@ let pedir = document.getElementById("pedir");
 let plantarse = document.getElementById("plantarse");
 let comprobar = document.getElementById("comprobar");
 let resultado=document.getElementById("resultado");
+let nueva=document.getElementById("nueva");
+let banca=document.getElementById("banca");
+let jugador=document.getElementById("jugador");
+let marcador=document.getElementById("marcador");
+let marcador1=document.getElementById("marcador1");
 
 //variables js
 let comprobador = false;//comprobador de que el jugador a barajeado
@@ -165,7 +170,9 @@ pedir.addEventListener("click", () => {
         baraja.extraerJugador();
         puntuacion = baraja.valorJugador(turno);
         baraja.mostrar(turno);
+        marcador.innerHTML=puntuacion;
     }
+    
 });//pedir cartas
 
 plantarse.addEventListener("click", () => {
@@ -173,10 +180,11 @@ plantarse.addEventListener("click", () => {
     if (!comprobador || punto > 21) {
         document.write("Barajea primero tramposo");
     } else {
-        while (punto < puntuacion && punto <= 21) {
+        while (punto < puntuacion && puntuacion <= 21) {
             baraja.extraerMaquina();
             punto = baraja.valorJugador(turno);
             baraja.mostrar(turno);
+            marcador1.innerHTML=punto;
         }
     }
 });//turno de la maquina
@@ -185,16 +193,16 @@ comprobar.addEventListener("click", () => {
     if (puntuacion <= 21) {
         if (punto <= 21) {
             if (puntuacion > punto && punto <= 21) {
-                resultado.innerHTML="Gano el jugador";
+                resultado.innerHTML="Ganó el jugador";
             } else {
                 if (puntuacion == punto) {
                     resultado.innerHTML="Empate";
                 } else {
-                    resultado.innerHTML="Gano la Casa";
+                    resultado.innerHTML="Ganó la Casa";
                 }
             }
         } else {
-            resultado.innerHTML="Gano el Jugador";
+            resultado.innerHTML="Ganó el Jugador";
         }
     } else {
         resultado.innerHTML="Gano la Banca";
@@ -202,3 +210,15 @@ comprobar.addEventListener("click", () => {
 
 
 });//mostrar ganador
+
+nueva.addEventListener("click",()=>{
+    baraja = new Baraja();
+    turno=false;
+    marcador.innerHTML=" ";
+    marcador1.innerHTML=" ";
+    banca.innerHTML=" ";
+    jugador.innerHTML=" ";
+    puntuacion=0;
+    punto=0;
+    resultado.innerHTML=" ";
+})
