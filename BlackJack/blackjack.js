@@ -177,10 +177,11 @@ pedir.addEventListener("click", () => {
 
 plantarse.addEventListener("click", () => {
     turno = true;
-    if (!comprobador || punto > 21) {
+    if (!comprobador) {
         document.write("Barajea primero tramposo");
     } else {
-        while (punto < puntuacion && puntuacion <= 21) {
+        //la banca siempre tiene que sacar mas de 16
+        while (punto < puntuacion && punto <=16 && punto<=21) {
             baraja.extraerMaquina();
             punto = baraja.valorJugador(turno);
             baraja.mostrar(turno);
@@ -193,19 +194,24 @@ comprobar.addEventListener("click", () => {
     if (puntuacion <= 21) {
         if (punto <= 21) {
             if (puntuacion > punto && punto <= 21) {
-                resultado.innerHTML="Ganó el jugador";
+                resultado.innerHTML="Ganó el jugador<br>";
+                resultado.innerHTML+="<img src='./cartas/victoria.gif' id='gif'>";
             } else {
                 if (puntuacion == punto) {
-                    resultado.innerHTML="Empate";
+                    resultado.innerHTML="Empate<br>";
+                    resultado.innerHTML+="<img src='./cartas/empate.gif' id='gif'>";
                 } else {
-                    resultado.innerHTML="Ganó la Casa";
+                    resultado.innerHTML="Ganó la Casa<br>";
+                    resultado.innerHTML+="<img src='./cartas/nelson.gif' id='gif'>";
                 }
             }
         } else {
-            resultado.innerHTML="Ganó el Jugador";
+            resultado.innerHTML="Ganó el Jugador<br>";
+            resultado.innerHTML+="<img src='./cartas/victoria.gif' id='gif'>";
         }
     } else {
-        resultado.innerHTML="Gano la Banca";
+        resultado.innerHTML="Gano la Banca<br>";
+        resultado.innerHTML+="<img src='./cartas/nelson.gif' id='gif'>";
     }
 
 

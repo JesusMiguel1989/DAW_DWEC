@@ -1,6 +1,6 @@
 body {
     background-color: rgb(48, 102, 48);
-     text-align: center;
+    text-align: center;
     /*background: url("./cartas/mesa\ blackjack.jpeg") no-repeat;
     background-size: 100%;*/
 }
@@ -46,6 +46,11 @@ ul li{
     display:inline;
     padding:5px;
     list-style: none;
+}
+
+#gif{
+    width: 100px;
+    height: 100px;
 }
 
 #resultado{

@@ -58,10 +58,10 @@ btnTicket.addEventListener("click",()=>{
     if(productos.length<0){
         txtArea.innerHTML="No sere yo quien te diga que no me pagues por nada";
     }else{
-        for(i=0;i<productos.length;i++){
+        for(i=0;i<productos.length+1;i++){
             aux=productos.shift();
-            cadena+="Producto"+i+"     "+aux.getCantidad()+"\t\t"+aux.getPrecio().toFixed(2)+"€\t "+aux.getPrecioFinal().toFixed(2)+"€\n";
-            precioFinal+=aux.getPrecioFinal().toFixed(2);
+            cadena+="Producto"+i+"     "+aux.getCantidad()+"\t\t"+aux.getPrecio()+"€\t "+aux.getPrecioFinal().toFixed(2)+"€\n";
+            precioFinal+=aux.getPrecioFinal();
         }
         cadena+="Precio Final\t\t\t\t"+precioFinal+"€";
         txtArea.innerHTML=cadena;
