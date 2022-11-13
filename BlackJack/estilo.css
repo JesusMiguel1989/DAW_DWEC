@@ -10,6 +10,11 @@ img {
     height: 100px;
 }
 
+h1{
+    font-size: 25px;
+    text-decoration: underline;
+}
+
 #principal {
     display: block;
 }
@@ -56,6 +61,9 @@ ul li{
 #resultado{
     font-size: 50px;
     animation:titulo 2s infinite;
+    width: 500px;
+    display: flexbox;
+    margin: 0 auto ;
 }
 
 @keyframes titulo{

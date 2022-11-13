@@ -99,17 +99,17 @@ class Baraja {
     //mostrar cartas
     mostrar(turno) {
         let cadena = "";//cadena donde se guardara el nombre de la carta
-        let cadena1="";
+        let cadena1 = "";
         let aux;//auxiliar donde se guardara la mano del jugador activo
         let i;//variable programa
         let variable;
 
         if (!turno) {
             aux = this.jugador;
-            variable=document.getElementById("jugador");
+            variable = document.getElementById("jugador");
         } else {
             aux = this.maquina;
-            variable=document.getElementById("banca");
+            variable = document.getElementById("banca");
         }
 
         for (i = 0; i < aux.length; i++) {
@@ -127,12 +127,22 @@ class Baraja {
                     cadena = "Spade" + aux[i][0].getNumero() + ".png";
                     break;
             }
-            cadena1+='<img src="./cartas/' + cadena + '">';
+            cadena1 += '<img src="./cartas/' + cadena + '">';
             variable.innerHTML = cadena1;
-            
+
         }
-        cadena="";
-        //return cadena;
+        cadena = "";
+    }
+
+    conteoCartas(turno) {
+        let aux;//auxiliar donde se guardara la mano del jugador activo
+
+        if (!turno) {
+            aux = this.jugador;
+        } else {
+            aux = this.maquina;
+        }
+        return aux.length;
     }
 }
 
@@ -141,12 +151,12 @@ let barajar = document.getElementById("barajar");
 let pedir = document.getElementById("pedir");
 let plantarse = document.getElementById("plantarse");
 let comprobar = document.getElementById("comprobar");
-let resultado=document.getElementById("resultado");
-let nueva=document.getElementById("nueva");
-let banca=document.getElementById("banca");
-let jugador=document.getElementById("jugador");
-let marcador=document.getElementById("marcador");
-let marcador1=document.getElementById("marcador1");
+let resultado = document.getElementById("resultado");
+let nueva = document.getElementById("nueva");
+let banca = document.getElementById("banca");
+let jugador = document.getElementById("jugador");
+let marcador = document.getElementById("marcador");
+let marcador1 = document.getElementById("marcador1");
 
 //variables js
 let comprobador = false;//comprobador de que el jugador a barajeado
@@ -154,6 +164,8 @@ let puntuacion = 0, punto = 0;//puntuacion
 let baraja = new Baraja();
 let turno = false;//boleano para saber a quien le damos carta
 let cadena = "";//cadena que recoge la imagen
+let conteo = 0;//contador de cartas usuario para saber si es black jack
+let conteo1 = 0;
 
 barajar.addEventListener("click", () => {
     baraja.generarBaraja();
@@ -165,14 +177,14 @@ barajar.addEventListener("click", () => {
 pedir.addEventListener("click", () => {
     //let puntuacion=0;
     if (!comprobador || puntuacion > 21) {
-        document.write("Barajea primero tramposo");
+        resultado.innerHTML = "Pierde con dignidad, plantate<br>";
     } else {
         baraja.extraerJugador();
         puntuacion = baraja.valorJugador(turno);
         baraja.mostrar(turno);
-        marcador.innerHTML=puntuacion;
+        marcador.innerHTML = puntuacion;
+        conteo = baraja.conteoCartas(turno);
     }
-    
 });//pedir cartas
 
 plantarse.addEventListener("click", () => {
@@ -181,11 +193,12 @@ plantarse.addEventListener("click", () => {
         document.write("Barajea primero tramposo");
     } else {
         //la banca siempre tiene que sacar mas de 16
-        while (punto < puntuacion && punto <=16 && punto<=21) {
+        while (punto < puntuacion && punto <= 16 && punto <= 21) {
             baraja.extraerMaquina();
             punto = baraja.valorJugador(turno);
             baraja.mostrar(turno);
-            marcador1.innerHTML=punto;
+            marcador1.innerHTML = punto;
+            conteo1 = baraja.conteoCartas(turno);
         }
     }
 });//turno de la maquina
@@ -193,38 +206,61 @@ plantarse.addEventListener("click", () => {
 comprobar.addEventListener("click", () => {
     if (puntuacion <= 21) {
         if (punto <= 21) {
-            if (puntuacion > punto && punto <= 21) {
-                resultado.innerHTML="Ganó el jugador<br>";
-                resultado.innerHTML+="<img src='./cartas/victoria.gif' id='gif'>";
+            if (puntuacion > punto && puntuacion <= 21) {
+                resultado.innerHTML = "Ganó el jugador<br>";
+                resultado.innerHTML += "<img src='./cartas/victoria.gif' id='gif'>";
             } else {
-                if (puntuacion == punto) {
-                    resultado.innerHTML="Empate<br>";
-                    resultado.innerHTML+="<img src='./cartas/empate.gif' id='gif'>";
+                if (puntuacion == punto && puntuacion == 21) {
+                    if (puntuacion == punto && conteo > 2 && conteo1 > 2) {
+                        resultado.innerHTML = "Empate<br>";
+                        resultado.innerHTML += "<img src='./cartas/empate.gif' id='gif'>";
+                    }
+                    if (puntuacion == punto && conteo == 2 && conteo1 >= 3) {
+                        resultado.innerHTML = "Ganó el jugador<br>";
+                        resultado.innerHTML += "<img src='./cartas/victoria.gif' id='gif'><br>";
+                        resultado.innerHTML += "Victoria por BlackJack";
+                    }
+                    if (puntuacion == punto && conteo >= 3 && conteo1 == 2) {
+                        resultado.innerHTML = "Ganó la Casa<br>";
+                        resultado.innerHTML += "<img src='./cartas/nelson.gif' id='gif'><br>";
+                        resultado.innerHTML += "Victoria por BlackJack";
+                    }
+                    if (punto > puntuacion && conteo == 2) {
+                        resultado.innerHTML = "Ganó la Casa<br>";
+                        resultado.innerHTML += "<img src='./cartas/nelson.gif' id='gif'>";
+                        resultado.innerHTML += "Victoria por BlackJack";
+                    } else {
+                        resultado.innerHTML = "Ganó la Casa<br>";
+                        resultado.innerHTML += "<img src='./cartas/nelson.gif' id='gif'>";
+                    }
                 } else {
-                    resultado.innerHTML="Ganó la Casa<br>";
-                    resultado.innerHTML+="<img src='./cartas/nelson.gif' id='gif'>";
+                    if (puntuacion == punto) {
+                        resultado.innerHTML = "Empate<br>";
+                        resultado.innerHTML += "<img src='./cartas/empate.gif' id='gif'>";
+                    } else {
+                        resultado.innerHTML = "Ganó la Casa<br>";
+                        resultado.innerHTML += "<img src='./cartas/nelson.gif' id='gif'>";
+                    }
                 }
             }
         } else {
-            resultado.innerHTML="Ganó el Jugador<br>";
-            resultado.innerHTML+="<img src='./cartas/victoria.gif' id='gif'>";
+            resultado.innerHTML = "Ganó el Jugador<br>";
+            resultado.innerHTML += "<img src='./cartas/victoria.gif' id='gif'>";
         }
     } else {
-        resultado.innerHTML="Gano la Banca<br>";
-        resultado.innerHTML+="<img src='./cartas/nelson.gif' id='gif'>";
+        resultado.innerHTML = "Gano la Banca<br>";
+        resultado.innerHTML += "<img src='./cartas/nelson.gif' id='gif'>";
     }
-
-
 });//mostrar ganador
 
-nueva.addEventListener("click",()=>{
+nueva.addEventListener("click", () => {
     baraja = new Baraja();
-    turno=false;
-    marcador.innerHTML=" ";
-    marcador1.innerHTML=" ";
-    banca.innerHTML=" ";
-    jugador.innerHTML=" ";
-    puntuacion=0;
-    punto=0;
-    resultado.innerHTML=" ";
+    turno = false;
+    marcador.innerHTML = " ";
+    marcador1.innerHTML = " ";
+    banca.innerHTML = " ";
+    jugador.innerHTML = " ";
+    puntuacion = 0;
+    punto = 0;
+    resultado.innerHTML = " ";
 })
