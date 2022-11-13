@@ -54,7 +54,8 @@ function ver(tareas){
 btnAñadir.addEventListener("click",(cod,tar)=>{
     cod=parseInt(codigo.value);
     tar=tarea.value;
-    if(!isNaN(cod) && (tar!="ADMINISTRATIVO" && tar!="EMPRESARIAL" && tar!="PERSONAL")){
+    tar=tar.toLowerCase();
+    if(!isNaN(cod) && (tar!="administrativo" && tar!="empresarial" && tar!="personal")){
         txtArea.innerHTML="Uno de los campo es erroneo";
     }else{
         aux=new Tareas(cod,tar);
