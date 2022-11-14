@@ -42,18 +42,14 @@ class Baraja {
             i++;
         } while (i < 53);
         this.baraja = auxiliar;
-        /*
-        for(i=0;i<53;i++){
-            this.baraja.push(auxiliar.splice(i,1));
-        }*/
     }//funcion barajear
 
     extraerJugador() {
-        this.jugador.push(this.baraja.shift());//extraemos la 1 cata de la braja y se la damos al jugador
+        this.jugador.push(this.baraja.shift());//extraemos la primera carta de la braja y se la damos al jugador
     }
 
     extraerMaquina() {
-        this.maquina.push(this.baraja.shift());//extraemos la 1 carta de a baraja y se la damos a la maquina
+        this.maquina.push(this.baraja.shift());//extraemos la primera carta de a baraja y se la damos a la maquina
     }
 
     valorJugador(turno) {
@@ -81,7 +77,7 @@ class Baraja {
                 }
             }
         }//for
-        //comprobamos que esta por debajo de 21,sino los as pasan a valer 1
+        //comprobamos que esta por debajo de 21,sino los ases pasan a valer 1
         if (total > 21) {
             total = 0;
             for (i = 0; i < aux.length; i++) {
@@ -92,17 +88,17 @@ class Baraja {
                     total += carta;
                 }
             }//for
-        }//if si supera los 21, 2 oportunidad
+        }//if si supera los 21, 2º oportunidad
         return total;
     }
 
     //mostrar cartas
     mostrar(turno) {
         let cadena = "";//cadena donde se guardara el nombre de la carta
-        let cadena1 = "";
+        let cadena1 = "";//cadena donde se inserta la etiqueta imagen
         let aux;//auxiliar donde se guardara la mano del jugador activo
         let i;//variable programa
-        let variable;
+        let variable;//variable para usar el array de jugador o de maquina
 
         if (!turno) {
             aux = this.jugador;
@@ -129,9 +125,7 @@ class Baraja {
             }
             cadena1 += '<img src="./cartas/' + cadena + '">';
             variable.innerHTML = cadena1;
-
         }
-        cadena = "";
     }
 
     conteoCartas(turno) {
@@ -165,7 +159,7 @@ let baraja = new Baraja();
 let turno = false;//boleano para saber a quien le damos carta
 let cadena = "";//cadena que recoge la imagen
 let conteo = 0;//contador de cartas usuario para saber si es black jack
-let conteo1 = 0;
+let conteo1 = 0;//contador de cartas de la maquina
 
 barajar.addEventListener("click", () => {
     baraja.generarBaraja();
@@ -190,7 +184,7 @@ pedir.addEventListener("click", () => {
 plantarse.addEventListener("click", () => {
     turno = true;
     if (!comprobador) {
-        document.write("Barajea primero tramposo");
+        resultado.innerHTML = "Barajea primero tramposo";
     } else {
         //la banca siempre tiene que sacar mas de 16
         while (punto < puntuacion && punto <= 16 && punto <= 21) {
