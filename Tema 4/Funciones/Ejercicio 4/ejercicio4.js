@@ -88,6 +88,9 @@ function codificar(aux, cadena) {
 function descodificar(aux, cadena) {
     for (i = 0; i < cadena.length; i++) {
         for (j = arrayAbecedario.length; j >= 0; j --) {
+            while(aux>=27){
+                aux-=27;
+            }
             if (cadena[i] == arrayAbecedario[j]) {
                 if ((j - aux) < 0) {
                     codificado[i] = arrayAbecedario[(j - aux) + 27];

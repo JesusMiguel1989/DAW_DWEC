@@ -42,10 +42,10 @@ let i;//variable del programa
 
 //funcion que muestra en el txtarea
 function ver(tareas){
-    let i=0,aux=tareas;
+    let i=0;//variable del for
     cadena="Tarea*****Codigo*****Tipo\n";
     for(i=0;i<tareas.length;i++){
-        cadena+="Tarea"+(i+1)+"     "+aux[i].getCodigo()+"     "+aux[i].getTarea()+"\n";
+        cadena+="Tarea"+(i+1)+"     "+tareas[i].getCodigo()+"     "+tareas[i].getTarea()+"\n";
     }
     return cadena;
 }
