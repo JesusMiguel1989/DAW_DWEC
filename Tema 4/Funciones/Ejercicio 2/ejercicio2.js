@@ -8,25 +8,26 @@ el número obtenido en la operación como índice de este array para averiguar l
 
 //recogemos los elementos del DOM
 let numero = document.getElementById("numero");
-let btn= document.getElementById("btn");
+let btn = document.getElementById("btn");
 let letra = document.getElementById("letra");
-let aux, resto=0;//variable numerica
+let aux = 0, resto = 0;//variable numerica
 
 //let arrayLetras = ('T','R','W','A','G','M','Y','F','P','D','X','B','N','J','Z','S','Q','V','H','L','C','K','E');
 
-btn.addEventListener("click",()=>{
-    let arrayLetras =  ['T','R','W','A','G','M','Y','F','P','D','X','B','N','J','Z','S','Q','V','H','L','C','K','E'];
+btn.addEventListener("click", () => {
+    let arrayLetras = ['T', 'R', 'W', 'A', 'G', 'M', 'Y', 'F', 'P', 'D', 'X', 'B', 'N', 'J', 'Z', 'S', 'Q', 'V', 'H', 'L', 'C', 'K', 'E'];
 
     //pasamos el texto del input a numerico
-    aux=parseInt(numero.value);
+    aux = parseInt(numero.value);
+
 
     //comprobamos si es un numero
-    if(isNaN(aux) || aux.length!=8){
-        numero.value="lo siento eso no es un numero";
-        letra.value="Sigue sin serlo";
-    }else{
+    if (isNaN(aux) && aux.length != 7) {
+        numero.value = "lo siento eso no es un numero";
+        letra.value = "Sigue sin serlo";
+    } else {
         //dividimos entre 23 y nos quedamos con el resto
-        resto=aux%23;
-        letra.value=arrayLetras[resto];
+        resto = aux % 23;
+        letra.value = arrayLetras[resto];
     }
 });
