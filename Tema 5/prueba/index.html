@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <form action="#" method="post">
+        <fieldset style="display: inline-block">
+            <legend>Formulario</legend>
+            <label for="nombre">Escriba su nombre</label><br>
+            <input type="text" id="nombre" name="nombre"><br>
+            <label for="apellidos">Escriba su apellido</label><br>
+            <input type="text" id="apellido" name="apellido"><br>
+            <label for="telefono">Escribe tu telefono</label><br>
+            <input type="number" placeholder="Telefono" id="telefono" name="telefono"><br>
+
+            <label for="email">Escribe tu email</label><br>
+            <input type="email" id="email" name="email"><br>
+
+            <label for="codigo">Escribe tu codigo</label><br>
+            <input type="tex" id="telefono" name="codigo" pattern="^[A-Z].[0-9].*"><br>
+
+            <label for="file">Escribe tu archivo</label><br>
+            <input type="file" id="file" name="file"><br>
+
+            <label for="fecha">calendario</label><br>
+            <input type="date" id="date" name="date"><br>
+
+            <label for="provincia" id="provincia">Selecciona provincia</label>
+            <select name="provincia">
+                <option value="av">Avila</option>
+                <option value="bu">Burgos</option>
+                <option value="le">Leon</option>
+                <option value="av">Palencia</option>
+                <option value="se">Segovia</option>
+                <option value="av">Soria</option>
+                <option value="so">Salamanca</option>
+                <option value="va">Valladolid</option>
+                <option value="za">Zamora</option>
+            </select>
+
+            <meter value="50" min="1" max="200" high="150" low="60" >50</meter>
+            <progress max="200" value="60"></progress>
+            <fieldset>
+                <legend>Sexo</legend>
+                <!--<label for="sexo">Escriba su sexo</label><br>-->
+                <input type="radio" id="hombre" name="sexo" value="hombre">
+                <label for="hombre">Hombre</label><br>
+                <input type="radio" id="mujer" name="sexo" value="mujer">
+                <label for="mujer">Mujer</label><br><br>
+            </fieldset>
+
+            <fieldset>
+                <legend>Descuentos</legend>
+                <label for="descuentos">Familia numerosa</label>
+                <input type="checkbox" name="descuentos" id="descuentos" value="numerosa"><br>
+                <label for="Pension">Pension</label>
+                <input type="checkbox" name="pension" id="pension" value="pension"><br>
+                <label for="Pension">Necesidades especiales</label>
+                <input type="checkbox" name="ne" id="ne" value="numerosa"><br>
+            </fieldset>
+
+            <button type="submit">Enviar</button>
+            <input type="reset" value="limpiar">
+        </fieldset>
+    </form>
+    <script type="·text/javascript" src="js/script.js"></script>
+</body>
+
+</html>
