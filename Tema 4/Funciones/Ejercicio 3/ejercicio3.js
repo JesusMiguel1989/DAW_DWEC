@@ -19,7 +19,7 @@ let i, j;//variable numerica
 let acentos = ['á', 'é', 'í', 'ó', 'ú'];
 let vocales = ['a', 'e', 'i', 'o', 'u'];
 let dieresis = ['ä', 'ë', 'ï' , 'ö', 'ü'];
-let vocales1 = ['a', 'o', 'u'];
+
 
 //rellenamos el arraynumeros con 0
 for (i = 0; i < arrayAbecedario.length; i++) {
@@ -37,7 +37,7 @@ function transformarStringBasico(cadena) {
         }//for que recorre el array acentos
         for (j = 0; j < dieresis.length; j++) {
             if (cadena[i] == dieresis[j]) {
-                cadena[i] = vocales1[j];
+                cadena[i] = vocales[j];
             }
         }//for para las dieresis
     }//for que recorre cadena
