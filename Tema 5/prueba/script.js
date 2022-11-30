@@ -20,6 +20,7 @@ let miExpresionRegular =/^[AEIOU][13579][02468]\..{4}$/;
 let miCodigo= document.getElementById("ciudad");
 
 document.getElementById("formulario2").addEventListener("submit",(evento)=>{
+    
     if(miExpresionRegular.text(miCodigo.textContent)){
         console.log("estas intentando enviar un informe");
     }else{

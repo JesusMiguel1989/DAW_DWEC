@@ -167,4 +167,4 @@ let cadena41 = "Patría";
 
 console.log("cadena 39 ", exprej16.test(cadena39));
 console.log("cadena 40 ", exprej16.test(cadena40));
-console.log("cadena 40 ", exprej16.test(cadena41));
+console.log("cadena 41 ", exprej16.test(cadena41));
