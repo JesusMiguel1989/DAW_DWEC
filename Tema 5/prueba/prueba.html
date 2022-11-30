@@ -5,11 +5,11 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>prueba</title>
 </head>
 
 <body>
-    <form action="#" method="post">
+    <form action="#" method="post" id="formulario1">
         <fieldset style="display: inline-block">
             <legend>Formulario</legend>
             <label for="nombre">Escriba su nombre</label><br>
@@ -21,6 +21,7 @@
 
             <label for="email">Escribe tu email</label><br>
             <input type="email" id="email" name="email"><br>
+            <!--debe cumplir un patron-->
 
             <label for="codigo">Escribe tu codigo</label><br>
             <input type="tex" id="telefono" name="codigo" pattern="^[A-Z].[0-9].*"><br>
@@ -44,7 +45,7 @@
                 <option value="za">Zamora</option>
             </select>
 
-            <meter value="50" min="1" max="200" high="150" low="60" >50</meter>
+            <meter value="50" min="1" max="200" high="150" low="60">50</meter>
             <progress max="200" value="60"></progress>
             <fieldset>
                 <legend>Sexo</legend>
@@ -65,11 +66,23 @@
                 <input type="checkbox" name="ne" id="ne" value="numerosa"><br>
             </fieldset>
 
+            <input id="boton" type="button" value="boton">
             <button type="submit">Enviar</button>
             <input type="reset" value="limpiar">
         </fieldset>
     </form>
-    <script type="text/javascript" src="js/script.js"></script>
+<form id="formulario2">
+    <fieldset style="display: inline-block">
+    <legend>Formulario 2</legend>
+    <label>Escribe aqui tu ciudad</label><br>
+    <input type="text" id="ciudad" name="ciudad" value="por defecto"><br>
+    <button type="submit">Enviar<span style="color:red;">Cuidado</span></button>
+    <input type="reset" value="limpiar">
+</fieldset>
+
+</form>
+
+    <script type="·text/javascript" src="./script.js"></script>
 </body>
 
 </html>
