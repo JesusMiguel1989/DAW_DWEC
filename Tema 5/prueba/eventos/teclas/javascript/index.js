@@ -15,14 +15,26 @@ let funcionSeguimiento = (e) => {
 document.addEventListener("mousemove", funcionSeguimiento);
 let documento=document.getElementById("imagen");
 
+
+document.body.addEventListener("keyup",function(evento){
+    if(evento.altKey && evento.key=="F12"){
+        let capa=document.getElementById("capa");
+        capa.style.backgroundImage="url('https://source.unsplash.com/random')";
+    }
+})
+
+
 let funcionTeclas = (t) => {
     console.log(t.keyCode);
     if (t.altKey && t.keyCode == 123) {
         //document.innerHTML="<img src='./imagen/recortado.png'>";
         //documento.setAttribute("src", "recortado.png");
         documento.style.display="block";
+       
+    }else{
+        documento.style.display="none";
     }
 }
 
 
-document.addEventListener("keydown", funcionTeclas);
+document.body.addEventListener("keydown", funcionTeclas);
