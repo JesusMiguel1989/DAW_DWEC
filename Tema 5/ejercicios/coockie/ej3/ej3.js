@@ -1,48 +1,29 @@
-//contador de visitas en una web con la misma cookie
-//una cookie contador que cuenta visitas=> duracion un año
-//se crea con 1 
-//si existe cont++ 
-//alert cuando aumente y se guarde V
-//cookie sesionAbierta si o no segun conteste en el cuadro de dialogo
-//si no existe crea la cookie con su valor
-//si existe muestra o no las visitas
-//si el usuario no acepta las cookies se borran
+let respuesta = confirm("¿Quieres guardar cookies?");
 
-//FALTA GUARDAR LA COOKIE DE RESPUESTA
+if(respuesta==true){
+    let fecha = new Date();
+    let miliAño=fecha.getTime()+(1000*60*60*24*365);
+    let fechaCaducidad=new Date(miliAño);
+    
 
-let respuesta = confirm("Quieres guardar las cookies");
+    if(document.cookie==""){
+        document.cookie="Visitas="+1+"; expires="+fechaCaducidad.toUTCString();
+        console.log(document.cookie);
+    }else{
+        let cookie=document.cookie;
+        let visitas=cookie.split("=");
 
-if (respuesta == true) {
-    let cookie = document.cookie;
-    if (cookie == "") {//si existe la cookie
-        //calculamos un año
-        let fecha = new Date();
-        let aux = fecha.getTime() + (1000 * 60 * 60 * 24 / 365);
-        let fechaExpiracion = new Date(aux);  //fecha dentro de un año
-
-        document.cookie = "contador=1; expires=" + fechaExpiracion.toUTCString();
-    } else {//si no existe
-        let cont = parseInt(cookie.split("="));
-        let fecha = new Date();
-        let aux = fecha.getTime() + (1000 * 60 * 60 * 24 / 365);
-        let fechaExpiracion = new Date(aux);  //fecha dentro de un año
-        cont++;
-
-        //Modifico la cookie
-        document.cookie = "contador=" + cont + "; expires=" + fechaExpiracion.toUTCString();
+        visitas[1]=parseInt(visitas[1])+1;
+        document.cookie="Visitas="+visitas[1]+"; expires="+fechaCaducidad.toUTCString();
         alert("Visita registrada");
-        alert("Van "+cont + " visitas");
+        alert("Van "+visitas[1] + " visitas");
     }
 }else{
     let cookie = document.cookie;
     if (cookie != "") {//si existe la cookie
         //calculamos un año
-        let fecha = new Date();
-        let aux = fecha.getTime() + (1000 * 60 * 60 * 24 / 365);
-        let fechaExpiracion = new Date(aux);  //fecha dentro de un año
+        let fechaExpiracion = new Date(1);  //fecha dentro de un año
 
-        document.cookie = "contador=1; expires=" + fechaExpiracion.toUTCString();
+        document.cookie = "Visitas=1; expires=" + fechaExpiracion.toUTCString();
     }
 }
-
-//se borran todas si no quiere
