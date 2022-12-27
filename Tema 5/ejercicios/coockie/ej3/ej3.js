@@ -23,6 +23,9 @@ if (respuesta == true) {
         document.cookie = "contador=1; expires=" + fechaExpiracion.toUTCString();
     } else {//si no existe
         let cont = parseInt(cookie.split("="));
+        let fecha = new Date();
+        let aux = fecha.getTime() + (1000 * 60 * 60 * 24 / 365);
+        let fechaExpiracion = new Date(aux);  //fecha dentro de un año
         cont++;
 
         //Modifico la cookie

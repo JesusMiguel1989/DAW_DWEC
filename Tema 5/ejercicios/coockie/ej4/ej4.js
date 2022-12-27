@@ -10,7 +10,7 @@ let email = document.getElementById("email");
 let provincia = document.getElementById("provincia");
 let fecha = document.getElementById("fecha");
 let telefono = document.getElementById("telefono");
-let hora=document.getElementById("hora");
+let hora = document.getElementById("hora");
 
 //variables del programa
 let validacion = false;
@@ -42,26 +42,35 @@ apellidos.addEventListener("blur", (evento) => {
 let ponerFoco= new Event("Focus");
 capa.dispatchEvent(ponerFoco);
 */
-let ponerFoco= new Event("Focus");
+let ponerFoco = new Event("Focus");
 
 
 function nombreApellidos(nom, ape) {
     let validacion = true;
-    if (nom == "" || ape == "") {
+    nombre.style.border = "1px solid black";
+    apellidos.style.border = "1px solid black";
+    if (nom == "" && ape == "") {
+        validacion = false;
+        nombre.style.border = "2px solid red";
+        apellidos.style.border = "2px solid red";
+        errores.textContent += "Nombre Apellidos";
+    } else {
         if (nombre.value == "") {
             nombre.dispatchEvent(ponerFoco);
             validacion = false;
-            nombre.style.border = "1px solid red";
-            errores.innerHTML = "<h2>Nombre</h2>";
+            nombre.style.border = "2px solid red";
+            errores.textContent = "Nombre ";
         } else {
-            apellido.dispatchEvent(ponerFoco);
-            validacion = false;
-            apellidos.style.border = "1px solid red";
-            errores.innerHTML = "<h2>Apellidos</h2>";
+            if (apellidos == "") {
+                apellidos.dispatchEvent(ponerFoco);
+                validacion = false;
+                apellidos.style.border = "2px solid red";
+                errores.textContent = "Apellidos";
+            }
         }
-        return validacion;
-    }//validacion de apellios y nombre (vacio)
-}
+    }
+    return validacion;
+}//validacion de apellios y nombre (vacio)
 
 function edadValidacion(num) {
     let validacion = true;
@@ -75,12 +84,12 @@ function edadValidacion(num) {
 
 function nifValidacion(nif) {
     let validacion = true;
-    let expresion = /^[0-9]{8}[a-z]{1}/;
+    let expresion = /^\d{8}[a-zA-Z]/;
     validacion = expresion.test(nif);
     if (validacion == false) {
-        nif.dispatchEvent(ponerFoco);
+        //nif.dispatchEvent(ponerFoco);
         //////////////////////////////////////////////////////////////////////
-        nif.style.border = "1px solid red";
+        //    nif.style.border = "1px solid red";
     }
 
     return validacion;
@@ -104,93 +113,106 @@ function provinciaValidacion(validacion) {
 }
 
 function fechaValidacion(fecha) {
-    let expresion = /[0-9]{2}\/[0-9]{2}\/[0-9]{4}/;
-    if(expresion.test(fecha)){
-        fecha.dispatchEvent(ponerFoco);
-        return false;
-    }else{
+    let expresion = /\d{2}\/\d{2}\/\d{4}/;
+    if (expresion.test(fecha)) {
+        //fecha.dispatchEvent(ponerFoco);
         return true;
+    } else {
+        return false;
     }
-    
+
     ////////////////////////////////////////////////////////////////////////
 }
 
 function telefonoValidacion(telefono) {
+    telefono = parseInt(telefono);
     let expresion = /[0-9]{9}/;
-    if(expresion.test(telefono)){
-        return false;
-    }else{
+    if (expresion.test(telefono)) {
         return true;
+    } else {
+        return false;
     }
-    
+
     ////////////////////////////////////////////////////////////////////////
 }
 
-function horaValidacion(hora){
-    let expresion=/[0-2]{1}[0-9]{1}[:]{1}[0-5]{1}[0-9]{1}/;
-    if(expresion.test(hora)){
-        return false;
-    }else{
+function horaValidacion(hora) {
+    let expresion = /[0-2]{1}[0-9]{1}\:{1}[0-5]{1}[0-9]{1}/;
+    if (expresion.test(hora)) {
         return true;
+    } else {
+        return false;
     }
-/////////////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////////////
 }
 
 enviar.addEventListener("click", (e) => {
     e.preventDefault();
-    validacion2=true;
+    validacion2 = true;
     validacion = nombreApellidos(nombre.value, apellidos.value);
     if (validacion == false) {
-        
-        validacion2=false;
+        validacion2 = false;
     }
 
-    validacion = edadValidacion(edad.value);
+    validacion = edadValidacion(parseInt(edad.value));
+    edad.style.border = "1px solid black";
     if (validacion == false) {
-        errores.innerHTML = "<h2>Edad</h2>";
-        edad.style.border = "1px solid red";
-        validacion2=false;
+        errores.textContent += " Edad ";
+        edad.style.border = "2px solid red";
+        validacion2 = false;
     }
 
     validacion = nifValidacion(nif.value);
+    nif.style.border = "1px solid black";
     if (validacion == false) {
-        errores.innerHTML = "<h2>NIF</h2>";
-        nif.style.border = "1px solid red";
-        validacion2=false;
+        errores.textContent += "\nNIF";
+        nif.style.border = "2px solid red";
+        validacion2 = false;
     }
     validacion = mailValidacion(email.value);
+    email.style.border = "1px solid black";
     if (validacion == false) {
-        errores.innerHTML = "<h2>Email</h2>";
-        email.style.border = "1px solid red";
-        validacion2=false;
+        errores.textContent += "\nEmail";
+        email.style.border = "2px solid red";
+        validacion2 = false;
     }
 
     validacion = provinciaValidacion(provincia.value);
+    provincia.style.border = "1px solid black";
     if (validacion == false) {
-        errores.innerHTML = "<h2>Provincia</h2>";
-        provincia.style.border = "1px solid red";
-        validacion2=false;
+        errores.textContent += "\nProvincia";
+        provincia.style.border = "2px solid red";
+        validacion2 = false;
     }
 
     validacion = fechaValidacion(fecha.value);
+    fecha.style.border = "1px solid black";
     if (validacion == false) {
-        errores.innerHTML = "<h2>Fecha sin formato</h2>";
-        fecha.style.border = "1px solid red";
-        validacion2=false;
+        errores.textContent += "\nFecha";
+        fecha.style.border = "2px solid red";
+        validacion2 = false;
     }//fecha
 
     validacion = telefonoValidacion(telefono.value);
+    telefono.style.border = "1px solid black";
     if (validacion == false) {
-        errores.innerHTML = "<h2>Telefono incorrecto</h2>";
-        telefono.style.border = "1px solid red";
-        validacion2=false;
+        errores.textContent += "\nTelefono";
+        telefono.style.border = "2px solid red";
+        validacion2 = false;
     }//telefono
 
     validacion = horaValidacion(hora.value);
+    hora.style.border = "1px solid black";
     if (validacion == false) {
-        errores.innerHTML = "<h2>Telefono incorrecto</h2>";
-        hora.style.border = "1px solid red";
-        validacion2=false;
+        errores.textContent += "\nHora ";
+        hora.style.border = "2px solid red";
+        validacion2 = false;
     }//hora
 
+    if (validacion2 == true) {
+        let cadena = confirm("Quieres enviar los datos");
+        if (cadena == true) {
+            enviar.addEventListener("submit",()=>{});
+        }
+    }
 });
