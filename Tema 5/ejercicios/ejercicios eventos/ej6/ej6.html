@@ -1,0 +1,54 @@
+<!DOCTYPE html> 
+<html lang="es"> 
+    <head> 
+        <meta charset="UTF-8"> 
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"> 
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+        <title>Document</title> 
+        <link rel="stylesheet" href="./hojaEstilo.css"> 
+    </head> 
+    <body> 
+        <header> 
+            <h1>INFORME INCIDENCIA</h1> 
+        </header> 
+        <figure> 
+            <img src="./distribucion.jpg" alt="oficina" id="imagen"/> 
+        </figure> 
+        <main> 
+            <form id="formulario" action="#"> 
+                <table> 
+                    <tr> 
+                        <td> <label for="tipo"> Tipo de incidencia </label> </td> 
+                        <td> <select name="tipo" id="tipo"> 
+                            <option value="distribucion" selected>Distribución</option> 
+                            <option value="oficina">Oficina</option> 
+                            <option value="produccion">Producción</option> 
+                        </select> </td> 
+                    </tr>
+                    <tr> 
+                        <td> <label id="labelSerie" for="serie"> Número de serie </label> </td> 
+                        <td> <input type="text" name="serie" id="serie"> </td> 
+                    </tr> 
+                    <tr> 
+                        <td colspan="2"> 
+                            <button type="button" id="mostrarDescripcion"> Mostrar Descripción </button> 
+                            <div id="fDescripcion"> 
+                                <label for="descripcion" id="labelDescripcion">Descripción</label><br> 
+                                <textarea name="descripcion" id="descripcion" cols="30" rows="10"></textarea> 
+                            </div> 
+                        </td> 
+                    </tr> 
+                    <tr> 
+                        <td colspan="2"> <br> 
+                            <input type="submit" id="enviar" value="Enviar datos"> 
+                        </td> 
+                    </tr> 
+                </table> 
+                <div id="capaError"> 
+
+                </div> 
+            </form> 
+        </main> 
+        <script type="text/javascript" src="./ej6.js"></script> 
+    </body> 
+</html>
