@@ -46,7 +46,6 @@ enviar.addEventListener("click", (e) => {
         serie.classList.remove("erroneo");
         labelSerie.classList.remove("erroneo");
         capaError.style.display="none";
-        e.target.submit();
     } else {
         capaError.style.backgroundColor = "red";
         capaError.style.color = "white";
