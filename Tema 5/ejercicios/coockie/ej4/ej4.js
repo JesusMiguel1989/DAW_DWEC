@@ -17,13 +17,6 @@ let validacion = false;
 let validacion2;//variable que controla si existen errores
 
 
-if (cookie = "") {
-    document.cookie = "intentos=1";
-    cookie = document.cookie;
-    let cadena = cookie.split("=");
-    intentos.innerHTML = "<h1>Intento de envios del formulario: " + cadena[1] + "</h1>";
-}//si no existe cookie
-
 //focusout por blur
 nombre.addEventListener("blur", (evento) => {
     let cadena = nombre.value;
@@ -61,7 +54,7 @@ function nombreApellidos(nom, ape) {
             nombre.style.border = "2px solid red";
             errores.textContent = "Nombre ";
         } else {
-            if (apellidos == "") {
+            if (apellidos.value == "") {
                 apellidos.dispatchEvent(ponerFoco);
                 validacion = false;
                 apellidos.style.border = "2px solid red";
@@ -147,6 +140,19 @@ function horaValidacion(hora) {
 }
 
 enviar.addEventListener("click", (e) => {
+    if (cookie = "") {
+        document.cookie = "intentos="+1;      
+    }//si no existe cookie
+    else{
+        cookie = document.cookie;
+        
+        let contador = parseInt(cookie.split("=")[1]);
+        console.log(document.cookie);
+        contador++;
+        document.cookie = "intentos="+contador;
+    }
+    intentos.textContent="Intento de envio de formulario: "+document.cookie.split("=")[1];
+
     e.preventDefault();
     validacion2 = true;
     validacion = nombreApellidos(nombre.value, apellidos.value);
