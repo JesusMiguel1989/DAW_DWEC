@@ -1,4 +1,4 @@
-let cookie = document.cookie;
+
 let errores = document.getElementById("errores");
 let intentos = document.getElementById("intentos");
 let enviar = document.getElementById("enviar");
@@ -11,6 +11,11 @@ let provincia = document.getElementById("provincia");
 let fecha = document.getElementById("fecha");
 let telefono = document.getElementById("telefono");
 let hora = document.getElementById("hora");
+let reset= document.getElementById("button");
+let formulario=document.getElementById("formulario");
+
+document.cookie = "intentos=0";
+let cookie = document.cookie;
 
 //variables del programa
 let validacion = false;
@@ -46,19 +51,21 @@ function nombreApellidos(nom, ape) {
         validacion = false;
         nombre.style.border = "2px solid red";
         apellidos.style.border = "2px solid red";
-        errores.textContent += "Nombre Apellidos";
+        errores.innerHTML= "Nombre "+"<br>"+"Apellidos"+"<br>"+errores.innerHTML;
     } else {
         if (nombre.value == "") {
             nombre.dispatchEvent(ponerFoco);
             validacion = false;
             nombre.style.border = "2px solid red";
-            errores.textContent = "Nombre ";
+            nombre.focus();
+            errores.innerHTML = "Nombre "+"<br>"+errores.innerHTML;
         } else {
             if (apellidos.value == "") {
                 apellidos.dispatchEvent(ponerFoco);
                 validacion = false;
                 apellidos.style.border = "2px solid red";
-                errores.textContent = "Apellidos";
+                apellidos.focus();
+                errores.innerHTML = "Apellidos"+"<br>"+errores.innerHTML;
             }
         }
     }
@@ -139,13 +146,11 @@ function horaValidacion(hora) {
     /////////////////////////////////////////////////////////////////////////////
 }
 
-enviar.addEventListener("click", (e) => {
-    if (cookie = "") {
-        document.cookie = "intentos="+1;      
-    }//si no existe cookie
-    else{
+formulario.addEventListener("submit", (e) => {
+    errores.innerHTML="";
+    console.log(cookie);
+    if (!cookie==""){
         cookie = document.cookie;
-        
         let contador = parseInt(cookie.split("=")[1]);
         console.log(document.cookie);
         contador++;
@@ -153,72 +158,98 @@ enviar.addEventListener("click", (e) => {
     }
     intentos.textContent="Intento de envio de formulario: "+document.cookie.split("=")[1];
 
-    e.preventDefault();
     validacion2 = true;
     validacion = nombreApellidos(nombre.value, apellidos.value);
     if (validacion == false) {
         validacion2 = false;
     }
-
+    
     validacion = edadValidacion(parseInt(edad.value));
     edad.style.border = "1px solid black";
     if (validacion == false) {
-        errores.textContent += " Edad ";
+        errores.innerHTML= "Edad "+"<br>"+errores.innerHTML;
         edad.style.border = "2px solid red";
+        edad.focus();
         validacion2 = false;
     }
 
     validacion = nifValidacion(nif.value);
     nif.style.border = "1px solid black";
     if (validacion == false) {
-        errores.textContent += "\nNIF";
+        errores.innerHTML= "NIF"+"<br>"+errores.innerHTML;
         nif.style.border = "2px solid red";
+        nif.focus();
         validacion2 = false;
     }
     validacion = mailValidacion(email.value);
     email.style.border = "1px solid black";
     if (validacion == false) {
-        errores.textContent += "\nEmail";
+        errores.innerHTML= "Email"+"<br>"+errores.innerHTML;
         email.style.border = "2px solid red";
+        email.focus();
         validacion2 = false;
     }
 
     validacion = provinciaValidacion(provincia.value);
     provincia.style.border = "1px solid black";
     if (validacion == false) {
-        errores.textContent += "\nProvincia";
+        errores.innerHTML = "Provincia"+"<br>"+errores.innerHTML;
         provincia.style.border = "2px solid red";
+        provincia.focus();
         validacion2 = false;
     }
 
     validacion = fechaValidacion(fecha.value);
     fecha.style.border = "1px solid black";
     if (validacion == false) {
-        errores.textContent += "\nFecha";
+        errores.innerHTML= "Fecha"+"<br>"+errores.innerHTML;
         fecha.style.border = "2px solid red";
+        fecha.focus();
         validacion2 = false;
     }//fecha
 
     validacion = telefonoValidacion(telefono.value);
     telefono.style.border = "1px solid black";
     if (validacion == false) {
-        errores.textContent += "\nTelefono";
+        errores.innerHTML= "Telefono"+"<br>"+errores.innerHTML;
         telefono.style.border = "2px solid red";
+        telefono.focus();
         validacion2 = false;
     }//telefono
 
     validacion = horaValidacion(hora.value);
     hora.style.border = "1px solid black";
     if (validacion == false) {
-        errores.textContent += "\nHora ";
+        errores.innerHTML= "Hora"+"<br>"+errores.innerHTML;
         hora.style.border = "2px solid red";
+        hora.focus();
         validacion2 = false;
     }//hora
 
     if (validacion2 == true) {
         let cadena = confirm("Quieres enviar los datos");
-        if (cadena == true) {
-            enviar.addEventListener("submit",()=>{});
+        if (cadena == false) {
+            e.preventDefault();
         }
+    }else{
+        e.preventDefault();
     }
 });
+
+reset.addEventListener("click",()=>{
+    errores.innerHTML="";
+    edad.style.border = "1px solid black";
+    nombre.style.border = "1px solid black";
+    apellidos.style.border = "1px solid black";
+    nif.style.border = "1px solid black";
+    email.style.border = "1px solid black";
+    provincia.style.border = "1px solid black";
+    fecha.style.border = "1px solid black";
+    telefono.style.border = "1px solid black";
+    hora.style.border = "1px solid black";
+})
+
+//para añadir una clase a un elemento
+//nombre.classList.add("clase"); AÑADE
+//nombre.classList.remove("clase"); elimina
+//poniendo un solo & en el if final, la evaluacion sigue a pesar de no cumplirse la anterior
