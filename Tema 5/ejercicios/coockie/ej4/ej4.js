@@ -1,4 +1,3 @@
-
 let errores = document.getElementById("errores");
 let intentos = document.getElementById("intentos");
 let enviar = document.getElementById("enviar");
@@ -11,8 +10,8 @@ let provincia = document.getElementById("provincia");
 let fecha = document.getElementById("fecha");
 let telefono = document.getElementById("telefono");
 let hora = document.getElementById("hora");
-let reset= document.getElementById("button");
-let formulario=document.getElementById("formulario");
+let reset = document.getElementById("button");
+let formulario = document.getElementById("formulario");
 
 document.cookie = "intentos=0";
 let cookie = document.cookie;
@@ -20,7 +19,6 @@ let cookie = document.cookie;
 //variables del programa
 let validacion = false;
 let validacion2;//variable que controla si existen errores
-
 
 //focusout por blur
 nombre.addEventListener("blur", (evento) => {
@@ -36,12 +34,6 @@ apellidos.addEventListener("blur", (evento) => {
     apellidos.value = cadena;
 });//paso a mayusculas apellidos
 
-/*
-let ponerFoco= new Event("Focus");
-capa.dispatchEvent(ponerFoco);
-*/
-let ponerFoco = new Event("Focus");
-
 
 function nombreApellidos(nom, ape) {
     let validacion = true;
@@ -51,21 +43,19 @@ function nombreApellidos(nom, ape) {
         validacion = false;
         nombre.style.border = "2px solid red";
         apellidos.style.border = "2px solid red";
-        errores.innerHTML= "Nombre "+"<br>"+"Apellidos"+"<br>"+errores.innerHTML;
+        errores.innerHTML = "Nombre " + "<br>" + "Apellidos" + "<br>" + errores.innerHTML;
     } else {
         if (nombre.value == "") {
-            nombre.dispatchEvent(ponerFoco);
             validacion = false;
             nombre.style.border = "2px solid red";
             nombre.focus();
-            errores.innerHTML = "Nombre "+"<br>"+errores.innerHTML;
+            errores.innerHTML = "Nombre " + "<br>" + errores.innerHTML;
         } else {
             if (apellidos.value == "") {
-                apellidos.dispatchEvent(ponerFoco);
                 validacion = false;
                 apellidos.style.border = "2px solid red";
                 apellidos.focus();
-                errores.innerHTML = "Apellidos"+"<br>"+errores.innerHTML;
+                errores.innerHTML = "Apellidos" + "<br>" + errores.innerHTML;
             }
         }
     }
@@ -77,31 +67,23 @@ function edadValidacion(num) {
     if (isNaN(num) || num < 0 || num > 105) {
         edad.dispatchEvent(ponerFoco);
         validacion = false
-        //////////////////////////////////////////////////////////////////////
     }
     return validacion;
-}
+}//validacion edad
 
 function nifValidacion(nif) {
     let validacion = true;
     let expresion = /^\d{8}[a-zA-Z]/;
     validacion = expresion.test(nif);
-    if (validacion == false) {
-        //nif.dispatchEvent(ponerFoco);
-        //////////////////////////////////////////////////////////////////////
-        //    nif.style.border = "1px solid red";
-    }
-
     return validacion;
-}
+}//validacion nif
 
 function mailValidacion(email) {
     let validacion = true;
     let expresion = /^[a-z0-9\.\-\_]{3,}\@[a-z0-9\.\-\_]{3,}\.[a-z0-9]{2,3}/i;
     validacion = expresion.test(email);
-    //////////////////////////////////////////////////////////////////////
     return validacion;
-}
+}//validacion mail
 
 function provinciaValidacion(validacion) {
     if (validacion == "0") {
@@ -110,19 +92,16 @@ function provinciaValidacion(validacion) {
     } else {
         return true;
     }
-}
+}//validacion provincia
 
 function fechaValidacion(fecha) {
     let expresion = /\d{2}\/\d{2}\/\d{4}/;
     if (expresion.test(fecha)) {
-        //fecha.dispatchEvent(ponerFoco);
         return true;
     } else {
         return false;
     }
-
-    ////////////////////////////////////////////////////////////////////////
-}
+}//validacion fecha
 
 function telefonoValidacion(telefono) {
     telefono = parseInt(telefono);
@@ -132,9 +111,7 @@ function telefonoValidacion(telefono) {
     } else {
         return false;
     }
-
-    ////////////////////////////////////////////////////////////////////////
-}
+}//validacion telefono
 
 function horaValidacion(hora) {
     let expresion = /[0-2]{1}[0-9]{1}\:{1}[0-5]{1}[0-9]{1}/;
@@ -143,31 +120,28 @@ function horaValidacion(hora) {
     } else {
         return false;
     }
-    /////////////////////////////////////////////////////////////////////////////
-}
+}//validacion hora
 
 formulario.addEventListener("submit", (e) => {
-    errores.innerHTML="";
-    console.log(cookie);
-    if (!cookie==""){
+    errores.innerHTML = "";
+    if (!cookie == "") {
         cookie = document.cookie;
         let contador = parseInt(cookie.split("=")[1]);
-        console.log(document.cookie);
         contador++;
-        document.cookie = "intentos="+contador;
+        document.cookie = "intentos=" + contador;
     }
-    intentos.textContent="Intento de envio de formulario: "+document.cookie.split("=")[1];
+    intentos.textContent = "Intento de envio de formulario: " + document.cookie.split("=")[1];
 
     validacion2 = true;
     validacion = nombreApellidos(nombre.value, apellidos.value);
     if (validacion == false) {
         validacion2 = false;
     }
-    
+
     validacion = edadValidacion(parseInt(edad.value));
     edad.style.border = "1px solid black";
     if (validacion == false) {
-        errores.innerHTML= "Edad "+"<br>"+errores.innerHTML;
+        errores.innerHTML = "Edad " + "<br>" + errores.innerHTML;
         edad.style.border = "2px solid red";
         edad.focus();
         validacion2 = false;
@@ -176,7 +150,7 @@ formulario.addEventListener("submit", (e) => {
     validacion = nifValidacion(nif.value);
     nif.style.border = "1px solid black";
     if (validacion == false) {
-        errores.innerHTML= "NIF"+"<br>"+errores.innerHTML;
+        errores.innerHTML = "NIF" + "<br>" + errores.innerHTML;
         nif.style.border = "2px solid red";
         nif.focus();
         validacion2 = false;
@@ -184,7 +158,7 @@ formulario.addEventListener("submit", (e) => {
     validacion = mailValidacion(email.value);
     email.style.border = "1px solid black";
     if (validacion == false) {
-        errores.innerHTML= "Email"+"<br>"+errores.innerHTML;
+        errores.innerHTML = "Email" + "<br>" + errores.innerHTML;
         email.style.border = "2px solid red";
         email.focus();
         validacion2 = false;
@@ -193,7 +167,7 @@ formulario.addEventListener("submit", (e) => {
     validacion = provinciaValidacion(provincia.value);
     provincia.style.border = "1px solid black";
     if (validacion == false) {
-        errores.innerHTML = "Provincia"+"<br>"+errores.innerHTML;
+        errores.innerHTML = "Provincia" + "<br>" + errores.innerHTML;
         provincia.style.border = "2px solid red";
         provincia.focus();
         validacion2 = false;
@@ -202,7 +176,7 @@ formulario.addEventListener("submit", (e) => {
     validacion = fechaValidacion(fecha.value);
     fecha.style.border = "1px solid black";
     if (validacion == false) {
-        errores.innerHTML= "Fecha"+"<br>"+errores.innerHTML;
+        errores.innerHTML = "Fecha" + "<br>" + errores.innerHTML;
         fecha.style.border = "2px solid red";
         fecha.focus();
         validacion2 = false;
@@ -211,7 +185,7 @@ formulario.addEventListener("submit", (e) => {
     validacion = telefonoValidacion(telefono.value);
     telefono.style.border = "1px solid black";
     if (validacion == false) {
-        errores.innerHTML= "Telefono"+"<br>"+errores.innerHTML;
+        errores.innerHTML = "Telefono" + "<br>" + errores.innerHTML;
         telefono.style.border = "2px solid red";
         telefono.focus();
         validacion2 = false;
@@ -220,7 +194,8 @@ formulario.addEventListener("submit", (e) => {
     validacion = horaValidacion(hora.value);
     hora.style.border = "1px solid black";
     if (validacion == false) {
-        errores.innerHTML= "Hora"+"<br>"+errores.innerHTML;
+        errores.innerHTML = "Hora" + "<br>" + errores.innerHTML;
+        //hora.classList.add("error");
         hora.style.border = "2px solid red";
         hora.focus();
         validacion2 = false;
@@ -231,13 +206,13 @@ formulario.addEventListener("submit", (e) => {
         if (cadena == false) {
             e.preventDefault();
         }
-    }else{
+    } else {
         e.preventDefault();
     }
-});
+});//captura submit del formulario
 
-reset.addEventListener("click",()=>{
-    errores.innerHTML="";
+reset.addEventListener("click", () => {
+    errores.innerHTML = "";
     edad.style.border = "1px solid black";
     nombre.style.border = "1px solid black";
     apellidos.style.border = "1px solid black";
@@ -247,7 +222,7 @@ reset.addEventListener("click",()=>{
     fecha.style.border = "1px solid black";
     telefono.style.border = "1px solid black";
     hora.style.border = "1px solid black";
-})
+});//captura del evento reset
 
 //para añadir una clase a un elemento
 //nombre.classList.add("clase"); AÑADE
