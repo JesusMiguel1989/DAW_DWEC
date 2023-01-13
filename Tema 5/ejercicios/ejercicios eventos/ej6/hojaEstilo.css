@@ -25,3 +25,10 @@ main{
 .erroneo{
     border: 1px solid red;
 }
+
+.error{
+    text-align: center; 
+    color:white; 
+    font-family: sans-serif; 
+    background-color: red;
+}
