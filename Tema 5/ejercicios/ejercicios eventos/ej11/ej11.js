@@ -6,8 +6,8 @@ let abrir=document.getElementById("abrir");
 let cerrar=document.getElementById("cerrar");
 
 abrir.addEventListener("click",()=>{
-    contenido.style.width="300px";
-    sidebar.style.marginLeft="300px";
+    sidebar.style.width="300px";
+    contenido.style.marginLeft="300px";
     abrir.style.display="none";
     cerrar.style.display="block";
 })
@@ -15,6 +15,6 @@ abrir.addEventListener("click",()=>{
 cerrar.addEventListener("click",()=>{
     abrir.style.display="block";
     cerrar.style.display="none";
-    contenido.style.width="100%";
-    sidebar.style.marginLeft="0";
+    sidebar.style.width="0px";
+    contenido.style.marginLeft="0";
 })

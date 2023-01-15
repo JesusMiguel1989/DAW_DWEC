@@ -7,14 +7,16 @@ if(respuesta==true){
     
 
     if(document.cookie==""){
-        document.cookie="Visitas="+1+"; expires="+fechaCaducidad.toUTCString();
+        grabarCookie("Visitas",1,fechaCaducidad.toUTCString());
+        //document.cookie="Visitas="+1+"; expires="+fechaCaducidad.toUTCString();
         console.log(document.cookie);
     }else{
         let cookie=document.cookie;
         let visitas=cookie.split("=");
 
         visitas[1]=parseInt(visitas[1])+1;
-        document.cookie="Visitas="+visitas[1]+"; expires="+fechaCaducidad.toUTCString();
+        grabarCookie("Visitas",visitas[1],fechaCaducidad.toUTCString());
+        //document.cookie="Visitas="+visitas[1]+"; expires="+fechaCaducidad.toUTCString();
         alert("Visita registrada");
         alert("Van "+visitas[1] + " visitas");
     }
@@ -24,6 +26,7 @@ if(respuesta==true){
         //calculamos un año
         let fechaExpiracion = new Date(1);  //fecha dentro de un año
 
-        document.cookie = "Visitas=1; expires=" + fechaExpiracion.toUTCString();
+        //document.cookie = "Visitas=1; expires=" + fechaExpiracion.toUTCString();
+        borrarCookie("Visitas");
     }
 }

@@ -17,9 +17,9 @@ if (cookie == "") {
     cTextoUsuario.addEventListener("keyup", (evento) => {
         if (evento.key == "Enter") {
             alert("Introducido");
-            //grabarCookie("nombre",cTextoUsuario.value,aux);
+            grabarCookie("nombre",cTextoUsuario.value,aux);
             console.log("nombre=" + cTextoUsuario.value + "; expires=" + fechaCaducidad.toUTCString())
-            document.cookie = "nombre=" + cTextoUsuario.value + "; expires=" + fechaCaducidad.toUTCString();
+            //document.cookie = "nombre=" + cTextoUsuario.value + "; expires=" + fechaCaducidad.toUTCString();
         }
     })
     
@@ -36,8 +36,8 @@ if (cookie == "") {
         let aux = fecha.getTime() - 1;
         let fechaBorrado = new Date(aux);
 
-        //borrarCookie("nombre");
-        document.cookie = "nombre=" + cTextoUsuario.value + ";expires=" + fechaBorrado.toUTCString();
+        borrarCookie("nombre");
+        //document.cookie = "nombre=" + cTextoUsuario.value + ";expires=" + fechaBorrado.toUTCString();
     })
 
 }
