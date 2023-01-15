@@ -13,9 +13,16 @@ let hora = document.getElementById("hora");
 let reset = document.getElementById("button");
 let formulario = document.getElementById("formulario");
 
+//fecha para la cookie
+let fechacookie = new Date();
+let miliAño=fechacookie.getTime()+(1000*60*60*24*7);
+let fechaCaducidad=new Date(miliAño);
+
+grabarCookie("cookie",0,fechaCaducidad.toUTCString());
+/*
 document.cookie = "intentos=0";
 let cookie = document.cookie;
-
+*/
 //variables del programa
 let validacion = false;
 let validacion2;//variable que controla si existen errores
@@ -122,15 +129,22 @@ function horaValidacion(hora) {
     }
 }//validacion hora
 
+
+
 formulario.addEventListener("submit", (e) => {
     errores.innerHTML = "";
-    if (!cookie == "") {
+    if (!leerCookie("intentos") == "") {
+        let intentos=parseInt(leerCookie("intentos"));
+
+        intentos++;
+        cookie=grabarCookie("intentos",intentos,fechaCaducidad.toUTCString());
+        /*
         cookie = document.cookie;
         let contador = parseInt(cookie.split("=")[1]);
         contador++;
-        document.cookie = "intentos=" + contador;
+        document.cookie = "intentos=" + contador;*/
     }
-    intentos.textContent = "Intento de envio de formulario: " + document.cookie.split("=")[1];
+    intentos.textContent = "Intento de envio de formulario: " + leerCookie("intentos");
 
     validacion2 = true;
     validacion = nombreApellidos(nombre.value, apellidos.value);

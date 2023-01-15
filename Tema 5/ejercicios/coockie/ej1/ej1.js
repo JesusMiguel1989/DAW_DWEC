@@ -27,14 +27,18 @@ if (cookie == "") {
 } else {
     capaFormulario.style.display = "none";
     capaSaludo.style.display = "block";
+
+    coockie=leerCookie("nombre");
+    parrafoSaludo.textContent="Bienvenido " +  cookie;
+    /*
     cookie = document.cookie;
     let nombre = cookie.split("=");
     parrafoSaludo.textContent="Bienvenido " + nombre[1];//leerCookie(nombre);
-
+*/
     botonSaludo.addEventListener("click", () => {
-        let fecha = new Date();
+        /*let fecha = new Date();
         let aux = fecha.getTime() - 1;
-        let fechaBorrado = new Date(aux);
+        let fechaBorrado = new Date(aux);*/
 
         borrarCookie("nombre");
         //document.cookie = "nombre=" + cTextoUsuario.value + ";expires=" + fechaBorrado.toUTCString();
