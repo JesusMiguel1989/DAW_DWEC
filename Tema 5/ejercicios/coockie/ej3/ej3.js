@@ -27,7 +27,7 @@ if(respuesta==true){
     let cookie = document.cookie;
     if (cookie != "") {//si existe la cookie
         //calculamos un año
-        let fechaExpiracion = new Date(1);  //fecha dentro de un año
+        //let fechaExpiracion = new Date(1);  //fecha dentro de un año
 
         //document.cookie = "Visitas=1; expires=" + fechaExpiracion.toUTCString();
         borrarCookie("Visitas");
