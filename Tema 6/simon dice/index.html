@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simon dice</title>
+    <script src="./simon.js"></script>
+    <link rel="stylesheet" href="./index.css">
+</head>
+
+<body>
+    <div id="juego">
+        <h1>SIMON DICE</h1>
+        <input type="button" id="inicio" value="Empezar">
+        <input type="button" id="jugar" value="resetear">
+        <div id="tapete">
+            <div id="arriba">
+                <input type="button" id="rojo" value="      " class="op">
+                <input type="button" id="verde" value="      " class="op">
+            </div>
+            <div id="abajo">
+                <input type="button" id="amarillo" value="      " class="op">
+                <input type="button" id="azul" value="      " class="op">
+            </div>
+        </div>
+        <textarea id="patron"></textarea><br>
+        <input type="button" id="introducir" value="Introducir">
+    </div>
+</body>
+
+</html>

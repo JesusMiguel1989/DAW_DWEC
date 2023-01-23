@@ -1,0 +1,39 @@
+#juego{
+    background-color: bisque;
+    border-radius: 15%;
+    max-width: 220px;
+}
+
+input{
+    margin-top: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-bottom: 20px;
+}
+
+.op{
+    border-radius: 50%;
+    line-height: 30px;
+    background-color: gray;
+}
+
+#patron{
+    margin-left: 20px;
+    color: red;
+    font-weight: bold;
+}
+
+#introducir{
+    margin-left: 70px;
+    margin-bottom: 20px;
+}
+
+#tapete{
+    margin-left: 20px;
+}
+
+h1{
+    color: blue;
+    font-size: 20px;
+    margin-left: 40px;
+}
