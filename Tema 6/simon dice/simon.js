@@ -48,8 +48,8 @@ window.addEventListener("DOMContentLoaded", () => {
                         break;
                 }//switch
 
-                let tiempo = new Date();
-                while (new Date() - tiempo <= 2000);
+                let tiempo = new Date().getTime();
+                while (new Date().getTime() - tiempo <= 2000);
 
                 for (j = 0; j < 4; j++) {
                     colores[j].style.backgroundColor = "gray";
