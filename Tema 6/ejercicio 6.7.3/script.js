@@ -9,3 +9,6 @@ window.addEventListener("DOMContentLoaded",()=>{
         })
     }
 })
+
+//sergio usa el html del 1 y usaria el ev.currentTarget en la linea 8 para indicarle el elemento a cambiar
+//lo hace porque en ese html tiene mas cosas el parrafo (texto y nodo)

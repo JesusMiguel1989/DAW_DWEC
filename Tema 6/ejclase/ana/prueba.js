@@ -1,3 +1,4 @@
+
 window.addEventListener("DOMContentLoader",()=>{
     let boton=document.getElementById("btnAbrir1");
     console.log("Se ha cargado la pagina");

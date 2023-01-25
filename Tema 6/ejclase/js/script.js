@@ -30,4 +30,10 @@ window.addEventListener("load",()=>{
             location.reload();
         }
     })
+
+    var objeto = {
+        color: 'red',
+    }
+    
+    console.log(objeto.size);
 })

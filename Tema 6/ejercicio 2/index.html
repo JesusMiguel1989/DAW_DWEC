@@ -1,0 +1,23 @@
+<!DOCTYPE html> 
+<html> 
+    <head> 
+        <title>Ejemplo DOM - aprenderaprogramar</title> 
+        <meta charset="utf-8"> 
+    </head> 
+    <body> 
+        <p>Uno</p> 
+        <p>Dos</p> 
+        <p>Tres</p> 
+        <p>Cuatro</p> 
+        <script>
+            let parrafos=document.querySelectorAll("p"); 
+            let cont=1; 
+            for (let elemento of parrafos) { 
+                elemento.addEventListener("click",()=>{
+                    alert(cont)
+                }); 
+                cont++; 
+            } 
+        </script> 
+    </body> 
+</html>
