@@ -49,17 +49,50 @@ window.addEventListener("DOMContentLoaded", () => {
                 }//switch
 
                 let tiempo = new Date();
-                let mili=tiempo.getTime()+1000;
-                let tiempoEspera=new Date(mili);
-                while (tiempo.getTime() - tiempoEspera.getTime() <= 500){
-                    console.log(tiempo.getTime()-tiempoEspera.getTime());
-                    tiempo=new Date();
+                let mili = tiempo.getTime() + 1000;
+                let tiempoEspera = new Date(mili);
+                while (tiempoEspera.getTime() - tiempo.getTime() >= 0) {
+                    console.log(tiempoEspera.getTime() - tiempo.getTime());
+                    tiempo = new Date();
                 }
+
+                /* let now, end = new Date().getTime()+2000;
+                do{now = new Date().getTime()}while(now < end); */
 
                 for (j = 0; j < 4; j++) {
                     colores[j].style.backgroundColor = "gray";
                 }//for j
             }//for i
+        }
+
+        this.mostrar1 = (aux) => {
+            if (aux == this.ronda.length) {
+                return false;
+            } else {
+                switch (this.ronda[aux]) {
+                    case 1:
+                        colores[0].style.backgroundColor = "red";
+                        break;
+                    case 2:
+                        colores[1].style.backgroundColor = "green";
+                        break;
+                    case 3:
+                        colores[2].style.backgroundColor = "yellow";
+                        break;
+                    case 4:
+                        colores[3].style.backgroundColor = "blue";
+                        break;
+                }//switch
+                return true;
+            }
+
+        }//mostrar de apoco
+
+        this.gris = () => {
+            let j;
+            for (j = 0; j < 4; j++) {
+                colores[j].style.backgroundColor = "gray";
+            }//for j
         }
     }//objeto simon
 
@@ -80,8 +113,19 @@ window.addEventListener("DOMContentLoaded", () => {
 
     inicio.addEventListener("click", () => {
         let rondas = 4;
+        let aux = 0, final;
+        let intervalo;
         partida.empezamos(rondas);
-        partida.mostrar();
+        //partida.mostrar();
+        intervalo = setInterval(() => {
+            partida.gris();
+            final = partida.mostrar1(aux);
+            if (final) {
+                aux++;
+            } else {
+                clearInterval(intervalo);
+            }
+        }, 1000);
     });
 
     for (let i = 0; i < 4; i++) {
@@ -89,25 +133,25 @@ window.addEventListener("DOMContentLoaded", () => {
             switch (i) {
                 case 0:
                     colores[0].style.backgroundColor = "red";
-                    colores[i].addEventListener("blur",()=>{
+                    colores[i].addEventListener("blur", () => {
                         colores[0].style.backgroundColor = "grey";
                     })
                     break;
                 case 1:
                     colores[1].style.backgroundColor = "green";
-                    colores[i].addEventListener("blur",()=>{
+                    colores[i].addEventListener("blur", () => {
                         colores[1].style.backgroundColor = "grey";
                     })
                     break;
                 case 2:
                     colores[2].style.backgroundColor = "yellow";
-                    colores[i].addEventListener("blur",()=>{
+                    colores[i].addEventListener("blur", () => {
                         colores[2].style.backgroundColor = "grey";
                     })
                     break;
                 case 3:
                     colores[3].style.backgroundColor = "blue";
-                    colores[i].addEventListener("blur",()=>{
+                    colores[i].addEventListener("blur", () => {
                         colores[i].style.backgroundColor = "grey";
                     })
                     break;
@@ -121,11 +165,23 @@ window.addEventListener("DOMContentLoaded", () => {
         jugador = "";
         acierto = partida.comprobar(array);
         if (acierto) {
-            patron.textContent="Acierto";
+            patron.textContent = "Acierto";
             partida.sigueVivo();
-            partida.mostrar();
-        }else{
-            patron.textContent="LASTIMA";
+            //partida.mostrar();
+            let aux = 0, final;
+            let intervalo;
+            //partida.mostrar();
+            intervalo = setInterval(() => {
+                partida.gris();
+                final = partida.mostrar1(aux);
+                if (final) {
+                    aux++;
+                } else {
+                    clearInterval(intervalo);
+                }
+            }, 1000);
+        } else {
+            patron.textContent = "LASTIMA";
         }
 
     });
