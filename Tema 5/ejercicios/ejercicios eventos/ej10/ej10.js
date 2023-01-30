@@ -1,4 +1,4 @@
-let subseccion1=document.getElementById("subseccion1");
+/* let subseccion1=document.getElementById("subseccion1");
 let seccion1=document.getElementById("seccion1");
 let subseccion2=document.getElementById("subseccion2");
 let seccion2=document.getElementById("seccion2");
@@ -37,4 +37,19 @@ seccion4.addEventListener("mousemove",()=>{
 
 seccion4.addEventListener("mouseleave",()=>{
     subseccion4.style.display="none";
+}) */
+
+window.addEventListener("load",()=>{
+    let lista=document.getElementsByTagName("li");
+
+    for(let fila of lista){
+        fila.addEventListener("mousemove",()=>{
+            let elementos=fila.getElementsByTagName("div");
+            elementos[0].style.display="block";
+        })
+        fila.addEventListener("mouseleave",()=>{
+            let elementos=fila.getElementsByTagName("div");
+            elementos[0].style.display="none";
+        })
+    }
 })
