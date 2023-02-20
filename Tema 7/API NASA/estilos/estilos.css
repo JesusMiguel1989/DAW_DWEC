@@ -1,0 +1,58 @@
+#logo{
+    position: relative;
+    justify-content: center;
+    text-align: center;
+    background-color: black;
+}
+
+#logoImg{
+    width: 10%;
+}
+
+#botones{
+    background-color: rgb(78, 78, 240);
+    display: flex;
+    position: relative;
+    justify-content: center;
+    height: 60px;
+}
+
+#botones input{
+    font-size: 20px;
+    font-weight: bold;
+    background-color: rgb(78, 78, 240);
+    border: 0px solid black;
+    color: white;
+}
+
+#botones input:hover{
+    font-size: 20px;
+    font-weight: bold;
+    background-color: rgb(35, 35, 45);
+    border: 0px solid black;
+    color: white;
+}
+
+#cuerpo, body{
+    display: block;
+    background-color: black;
+    color: white;
+    text-align: center;
+}
+
+img{
+    width: 100%;
+    height: 100%;
+}
+
+.btnizq{
+    float: left;
+}
+
+.btndrc{
+    float: right;
+}
+
+.video{
+    width: 100%;
+}
