@@ -21,8 +21,14 @@ async function fotoDiaNasa(fecha) {
         cuerpo.appendChild(nuevaFoto);
     }
     if (texto.media_type == "video") {
-        let nuevoVideo = document.createElement("video");
-        nuevoVideo.src = texto.url;
+        let nuevoVideo = document.createElement("iframe");
+        nuevoVideo.src=texto.url;
+        nuevoVideo.title="YouTube video player" 
+        nuevoVideo.frameborder="0" 
+        nuevoVideo.width="780px";
+        nuevoVideo.height="500px";
+        nuevoVideo.allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+        nuevoVideo.allowfullscreen=true;
         nuevoVideo.autoplay = true;
         cuerpo.appendChild(nuevoVideo);
     }
