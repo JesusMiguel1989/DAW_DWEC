@@ -12,9 +12,6 @@ async function fotoDiaNasa(fecha) {
     let response = await fetch("https://api.nasa.gov/planetary/apod?api_key=fBkefbv4EJ9jhvI7wBpSFbzpF2MPFegGAwXJfL2b&date=" + year + "-" + mes + "-" + dia);
     let texto = await response.json();
 
-    let nuevoh2 = document.createElement("h2");
-    nuevoh2.textContent = texto.title;
-    cuerpo.appendChild(nuevoh2);
     if (texto.media_type == "image") {
         let nuevaFoto = document.createElement("img");
         nuevaFoto.src = texto.url;
@@ -22,13 +19,13 @@ async function fotoDiaNasa(fecha) {
     }
     if (texto.media_type == "video") {
         let nuevoVideo = document.createElement("iframe");
-        nuevoVideo.src=texto.url;
-        nuevoVideo.title="YouTube video player" 
-        nuevoVideo.frameborder="0" 
-        nuevoVideo.width="780px";
-        nuevoVideo.height="500px";
-        nuevoVideo.allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-        nuevoVideo.allowfullscreen=true;
+        nuevoVideo.src = texto.url;
+        nuevoVideo.title = "YouTube video player"
+        nuevoVideo.frameborder = "0"
+        nuevoVideo.width = "780px";
+        nuevoVideo.height = "500px";
+        nuevoVideo.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        nuevoVideo.allowfullscreen = true;
         nuevoVideo.autoplay = true;
         cuerpo.appendChild(nuevoVideo);
     }
@@ -60,19 +57,67 @@ async function Marte() {
     nuevoSelect.innerHTML = cad;
     nuevoSelect.id = "selectMarte";
     cuerpo.appendChild(nuevoSelect);
+
+
 }
 
 function borrar() {
+    let cuerpo = document.getElementById("cuerpo");
     let body = document.getElementsByTagName("body");
-    body[0].removeChild(body[0].children[2]);
-    let cuerpo = document.createElement("div");
-    cuerpo.id = "cuerpo";
-    body[0].appendChild(cuerpo);
+    body[0].removeChild(cuerpo);
+    let nuevo = document.createElement("div");
+    nuevo.id = "cuerpo";
+    body[0].appendChild(nuevo);
+}
+
+function Crear() {
+
+    let dia = fecha.getDate();
+    let mes = fecha.getMonth() + 1;
+    let year = fecha.getFullYear();
+
+    //elementos nuevos
+    let titulo = document.createElement("h1");
+    titulo.textContent = "Foto del dia";
+    cuerpo.appendChild(titulo);
+
+    let date = document.createElement("h3");
+    date.textContent = dia + "/" + mes + "/" + year;
+    cuerpo.appendChild(date);
+
+    let nuevoBtn = document.createElement("input");
+    nuevoBtn.type = "button";
+    nuevoBtn.value = "Previo";
+    nuevoBtn.id = "btnPrevio";
+    nuevoBtn.classList.add("btnizq");
+    cuerpo.appendChild(nuevoBtn);
+
+    let nuevoBtn1 = document.createElement("input");
+    nuevoBtn1.type = "button";
+    nuevoBtn1.value = "Siguiente";
+    nuevoBtn1.id = "btnProximo";
+    nuevoBtn1.classList.add("btndrc");
+    cuerpo.appendChild(nuevoBtn1);
+
+    let fechaUsuario = document.createElement("input");
+    fechaUsuario.type = "date";
+    fechaUsuario.id = "fechaUsuario";
+    fechaUsuario.classList.add("btnctr");
+    cuerpo.appendChild(fechaUsuario);
+
+    let nuevoBtn2 = document.createElement("input");
+    nuevoBtn2.type = "button";
+    nuevoBtn2.value = "Buscar";
+    nuevoBtn2.id = "btnBuscar";
+    nuevoBtn2.classList.add("btnctr");
+    cuerpo.appendChild(nuevoBtn2);
 }
 
 window.addEventListener("load", () => {
     let fotoDia = document.getElementById("btnFoto");
     let marte = document.getElementById("btnMarte");
+
+    let marteSelector=document.getElementById("selectMarte");
     let bolas = document.getElementById("btnBolas");
 
     let cuerpo = document.getElementById("cuerpo");
@@ -81,43 +126,33 @@ window.addEventListener("load", () => {
         borrar();
         let cuerpo = document.getElementById("cuerpo");
         /* cuerpo.children[0].style.display = "none"; */
-        let dia = fecha.getDate();
-        let mes = fecha.getMonth() + 1;
-        let year = fecha.getFullYear();
-
-        //elementos nuevos
-        let titulo = document.createElement("h1");
-        titulo.textContent = "Foto del dia";
-        cuerpo.appendChild(titulo);
-
-        let date = document.createElement("h3");
-        date.textContent = dia + "/" + mes + "/" + year;
-        cuerpo.appendChild(date);
 
         fotoDiaNasa(fecha);
 
-        let nuevoBtn = document.createElement("input");
-        nuevoBtn.type = "button";
-        nuevoBtn.value = "Previo";
-        nuevoBtn.id = "btnPrevio";
-        nuevoBtn.classList.add("btnizq");
-        cuerpo.appendChild(nuevoBtn);
-
-        let nuevoBtn1 = document.createElement("input");
-        nuevoBtn1.type = "button";
-        nuevoBtn1.value = "Siguiente";
-        nuevoBtn1.id = "btnProximo";
-        nuevoBtn1.classList.add("btndrc");
-        cuerpo.appendChild(nuevoBtn1);
+        Crear();
 
         let btnPrevio = document.getElementById("btnPrevio");
         let btnProximo = document.getElementById("btnProximo");
+        let btnBuscar = document.getElementById("btnBuscar");
+
+        btnBuscar.addEventListener("click", () => {
+            let date = document.getElementById("fechaUsuario");
+            let fecha = new Date(date.value);
+            let cuerpo = document.getElementById("cuerpo");
+
+            borrar();
+
+            Crear();
+
+            fotoDiaNasa(fecha);
+        })
 
         btnPrevio.addEventListener("click", () => {
             let milisegundos = fecha.getTime() - 1000 * 60 * 60 * 24;
             fecha = new Date(milisegundos);
 
             borrar();
+            Crear();
 
             fotoDia.dispatchEvent(evento);
             centinela = false;
@@ -133,6 +168,7 @@ window.addEventListener("load", () => {
 
                 if (cadena != cad) {
                     borrar();
+                    Crear();
                     fotoDia.dispatchEvent(evento);
                 } else {
                     btnProximo.style.disabled;
@@ -149,6 +185,10 @@ window.addEventListener("load", () => {
 
         Marte();
 
+    })
+
+    selectMarte.addEventListener("change",()=>{
+        
     })
 
 

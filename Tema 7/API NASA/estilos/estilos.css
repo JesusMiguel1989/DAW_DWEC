@@ -53,6 +53,10 @@ img{
     float: right;
 }
 
+.btnctr{
+    margin: 0 auto;;
+}
+
 .video{
     width: 100%;
 }
