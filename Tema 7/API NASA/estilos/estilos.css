@@ -60,3 +60,21 @@ img{
 .video{
     width: 100%;
 }
+
+#map{
+    height: 270px;
+    margin-top: 5%;
+    padding-left: 5px;
+}
+
+#datos{
+    float: left;
+    
+}
+
+#mapa{
+    margin-top: 5%;
+    margin-right: 10px;
+    float: right;
+    width: 50%;
+}
