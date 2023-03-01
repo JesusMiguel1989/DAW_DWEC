@@ -54,7 +54,8 @@ img{
 }
 
 .btnctr{
-    margin: 0 auto;;
+    position: relative;
+    margin: 0 auto;
 }
 
 .video{
@@ -77,4 +78,17 @@ img{
     margin-right: 10px;
     float: right;
     width: 50%;
+}
+
+img{
+    width: 50%;
+    height: 40%;
+}
+
+.astronauta{
+    width: 100%;
+}
+
+#btnBuscar{
+    display: block;
 }

@@ -2,8 +2,13 @@ let fecha = new Date();
 let evento = new Event("click");
 let centinela = false;
 let meteorito = 0;
+let fotoMarte = 0;
 let topeMeteoritos = 1000;
-let arrayBolas = [];
+let arrayCamaras = [' ', 'FHAZ', 'RHAZ', 'MAST', 'CHEMCAM', 'NAVCAM'];
+let arrayFotos = [0, 0, 0, 0, 0, 0];
+let fotomartebtn = 0;
+
+/*Revisar Meteoritos y marte*/
 
 async function fotoDiaNasa(fecha) {
     let cuerpo = document.getElementById("cuerpo");
@@ -14,6 +19,12 @@ async function fotoDiaNasa(fecha) {
 
     let response = await fetch("https://api.nasa.gov/planetary/apod?api_key=fBkefbv4EJ9jhvI7wBpSFbzpF2MPFegGAwXJfL2b&date=" + year + "-" + mes + "-" + dia);
     let texto = await response.json();
+
+    ///////////////////////////////////////////////////titulo de la foto
+
+    let titulo = document.createElement("h1");
+    titulo.textContent = texto.title;
+    cuerpo.appendChild(titulo);
 
     if (texto.media_type == "image") {
         let nuevaFoto = document.createElement("img");
@@ -35,33 +46,111 @@ async function fotoDiaNasa(fecha) {
 
 }
 
-async function Marte() {
-    let cuerpo = document.getElementById("cuerpo");
-    let titulo = document.createElement("h1");
-    titulo.textContent = "¿Que Camara del Curiosity quieres ver?";
-    cuerpo.appendChild(titulo);
 
-    let camaras = [];
-
+async function Camaras() {
     let response = await fetch("https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?sol=1000&api_key=fBkefbv4EJ9jhvI7wBpSFbzpF2MPFegGAwXJfL2b");
     let texto = await response.json();
 
-    for (let i = 0; i < texto.photos.length; i++) {
-        if (!camaras.includes(texto.photos[i].camera.name)) {
-            camaras.push(texto.photos[i].camera.name);
+    let i, posicion = 0;
+    for (i = 0; i < texto.photos.length; i++) {
+        if (texto.photos[i].camera.name == arrayCamaras[posicion]) {
+            arrayFotos[posicion]++;
+        } else {
+            posicion++;
         }
     }
+}
 
-    let nuevoSelect = document.createElement("select");
+function dispositivo() {
+    let marteSelector = document.getElementById("selectMarte");
+    //doy un valor a camara para saber que camara es y cuantas fotos tienen
+    let camara;
+    switch (marteSelector.value) {
+        case "FHAZ":
+            camara = 0;
+            break;
+        case "RHAZ":
+            camara = 1;
+            break;
+        case "MAST":
+            camara = 2;
+            break;
+        case "CHEMCAM":
+            camara = 3;
+            break;
+        case "NAVCAM":
+            camara = 4;
+            break;
+        default:
+            break;
+    }
+    return camara;
+}
+
+async function Marte() {
+    Camaras();
     let cad = "";
-    for (i = 0; i < camaras.length; i++) {
-        cad += "<option>" + camaras[i] + "</option>";
+    let cuerpo = document.getElementById("cuerpo");
+    let cuerpo2 = document.getElementById("cuerpo2");
+    let titulo = document.createElement("h1");
+    titulo.textContent = "¿Que Camara del Curiosity quieres ver?";
+    cuerpo2.appendChild(titulo);
+
+    borrar();
+    let nuevoSelect = document.createElement("select");
+
+    for (i = 0; i < arrayCamaras.length; i++) {
+        cad += "<option>" + arrayCamaras[i] + "</option>";
     }
     nuevoSelect.innerHTML = cad;
     nuevoSelect.id = "selectMarte";
-    cuerpo.appendChild(nuevoSelect);
+    cuerpo2.appendChild(nuevoSelect);
+    let marteSelector = document.getElementById("selectMarte");
+    let anterior = document.getElementById("anterior");
+    let siguiente = document.getElementById("siguiente");
 
+    //doy un valor a camara para saber que camara es y cuantas fotos tienen
 
+    let camara
+    marteSelector.addEventListener("change", () => {
+        camara = dispositivo();
+        fotomartebtn = 0;
+        Marte2(camara, 0);
+
+    })
+
+    anterior.addEventListener("click", (e) => {
+        if (fotomartebtn >= 1) {
+            fotomartebtn--;
+            Marte2(camara, fotomartebtn);
+        } else {
+            e.preventDefault();
+        }
+    })
+
+    siguiente.addEventListener("click", (ev) => {
+        if (fotomartebtn < arrayFotos[camara + 1]) {
+            fotomartebtn++;
+            Marte2(camara, fotomartebtn);
+        } else {
+            ev.preventDefault();
+        }
+    })
+}
+
+/////////////////////////////////////////////////////////////////fotos de Marte
+async function Marte2(camara, fotomartebtn) {
+
+    let response = await fetch("https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?sol=1000&api_key=fBkefbv4EJ9jhvI7wBpSFbzpF2MPFegGAwXJfL2b&camera=" + arrayCamaras[camara + 1]);
+    let texto2 = await response.json();
+
+    borrar();
+    let cuerpo = document.getElementById("cuerpo");
+
+    let img = texto2.photos[fotoMarte].img_src;
+    let foto = document.createElement("img");
+    foto.src = texto2.photos[fotomartebtn].img_src;
+    cuerpo.appendChild(foto);
 }
 
 async function Meteoros(num) {
@@ -77,6 +166,7 @@ async function Meteoros(num) {
     cuerpo.appendChild(mapa);
 
     let response = await fetch("https://ssd-api.jpl.nasa.gov/fireball.api");
+    //,{ method:"get", mode:"no-cors"}
     let texto = await response.json();
 
     /* for (let i = 0; i < texto.data.length; i++) {
@@ -108,13 +198,13 @@ async function Meteoros(num) {
         "<tr><td>Direccion Latitud</td><td>" + texto.data[num][4] + "</td></tr>" +
         "<tr><td>Longitud</td><td>" + texto.data[num][5] + " Grados</td></tr>" +
         "<tr><td>Direccion Longitud</td><td>" + texto.data[num][6] + "</td></tr>" +
-        "<tr><td>Dimension</td><td>" + texto.data[num][7] + "</td></tr>" +
+        "<tr><td>Altitud</td><td>" + texto.data[num][7] + " KM</td></tr>" +
         "<tr><td>Velocidad</td><td>" + texto.data[num][8] + " m/s</td></tr>" +
         "<tr><td>Tiempo</td><td>" + texto2.weather[0].main + "</td></tr>" +
         "<tr><td>Velocidad del Viento</td><td>" + texto2.wind.speed + " Km/h</td></tr>" +
         "<tr><td>Humedad</td><td>" + texto2.main.humidity + " %</td></tr>";
 
-    
+
     datos.appendChild(dato);
 
     //div mapa
@@ -194,6 +284,17 @@ window.addEventListener("load", () => {
 
     fotoDia.addEventListener("click", () => {
         borrar();
+        let cuerpo2 = document.getElementById("cuerpo2");
+
+        if (cuerpo2 != null) {
+            let siguiente = document.getElementById("siguiente");
+            let anterior = document.getElementById("anterior");
+            let body = document.getElementsByTagName("body");
+            body[0].removeChild(cuerpo2);
+            body[0].removeChild(siguiente);
+            body[0].removeChild(anterior);
+        }
+
         let cuerpo = document.getElementById("cuerpo");
         /* cuerpo.children[0].style.display = "none"; */
 
@@ -249,20 +350,48 @@ window.addEventListener("load", () => {
             }
         })
     })
-
+    //////////////////////////////////////////////////////////////////////////////////////////////////////
     marte.addEventListener("click", () => {
         borrar();
 
+        let cuerpo2 = document.getElementById("cuerpo2");
+
+        if (cuerpo2 != null) {
+            let siguiente = document.getElementById("siguiente");
+            let anterior = document.getElementById("anterior");
+            let body = document.getElementsByTagName("body");
+            body[0].removeChild(cuerpo2);
+            body[0].removeChild(siguiente);
+            body[0].removeChild(anterior);
+        }
+
+        let body = document.getElementsByTagName("body");
+        let nuevo = document.createElement("div");
+        nuevo.id = "cuerpo2";
+        body[0].appendChild(nuevo);
+
+        let anterior = document.createElement("input");
+        anterior.type = "button";
+        anterior.id = "anterior";
+        anterior.value = "<=";
+        body[0].appendChild(anterior);
+
+        let siguiente = document.createElement("input");
+        siguiente.type = "button";
+        siguiente.id = "siguiente";
+        siguiente.value = "=>";
+        body[0].appendChild(siguiente);
         Marte();
 
     })
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    /* selectMarte.addEventListener("change",()=>{
-        
-    }) */
 
     bolas.addEventListener("click", () => {
         borrar();
+        let cuerpo2 = document.getElementById("cuerpo2");
+        let body = document.getElementsByTagName("body");
+        body[0].removeChild(cuerpo2);
 
         let cuerpo = document.getElementById("cuerpo");
         let padre = cuerpo.parentElement;
