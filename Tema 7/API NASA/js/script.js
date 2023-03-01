@@ -10,17 +10,17 @@ let fotomartebtn = 0;
 
 /*Revisar Meteoritos y marte*/
 
-async function fotoDiaNasa(fecha) {
+async function fotoDiaNasa(fecha1) {
     let cuerpo = document.getElementById("cuerpo");
 
-    let dia = fecha.getDate();
-    let mes = fecha.getMonth() + 1;
-    let year = fecha.getFullYear();
+    fecha=fecha1;
+    let dia = fecha1.getDate();
+    let mes = fecha1.getMonth() + 1;
+    let year = fecha1.getFullYear();
 
     let response = await fetch("https://api.nasa.gov/planetary/apod?api_key=fBkefbv4EJ9jhvI7wBpSFbzpF2MPFegGAwXJfL2b&date=" + year + "-" + mes + "-" + dia);
     let texto = await response.json();
 
-    ///////////////////////////////////////////////////titulo de la foto
 
     let titulo = document.createElement("h1");
     titulo.textContent = texto.title;
@@ -43,9 +43,7 @@ async function fotoDiaNasa(fecha) {
         nuevoVideo.autoplay = true;
         cuerpo.appendChild(nuevoVideo);
     }
-
 }
-
 
 async function Camaras() {
     let response = await fetch("https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?sol=1000&api_key=fBkefbv4EJ9jhvI7wBpSFbzpF2MPFegGAwXJfL2b");
@@ -90,7 +88,7 @@ function dispositivo() {
 async function Marte() {
     Camaras();
     let cad = "";
-    let cuerpo = document.getElementById("cuerpo");
+    //let cuerpo = document.getElementById("cuerpo");
     let cuerpo2 = document.getElementById("cuerpo2");
     let titulo = document.createElement("h1");
     titulo.textContent = "¿Que Camara del Curiosity quieres ver?";
@@ -147,6 +145,29 @@ async function Marte2(camara, fotomartebtn) {
     borrar();
     let cuerpo = document.getElementById("cuerpo");
 
+    let nombre = document.createElement("h3");
+    switch (arrayCamaras[camara + 1]) {
+        case "FHAZ":
+            nombre.textContent = "Front Hazard Avoidance Camera";
+            break;
+        case "RHAZ":
+            nombre.textContent = "Rear Hazard Avoidance Camera";
+            break;
+        case "MAST":
+            nombre.textContent = "Mast Camera";
+            break;
+        case "FHAZ":
+            nombre.textContent = "Front Hazard Avoidance Camera";
+            break;
+        case "CHEMCAM":
+            nombre.textContent = "Chemestry and Camera Complex";
+            break;
+        case "NAVCAM":
+            nombre.textContent = "Navigation Camera";
+            break;
+    }
+    nombre.classList.add("titulo");
+    cuerpo.appendChild(nombre);
     let img = texto2.photos[fotoMarte].img_src;
     let foto = document.createElement("img");
     foto.src = texto2.photos[fotomartebtn].img_src;
@@ -169,9 +190,6 @@ async function Meteoros(num) {
     //,{ method:"get", mode:"no-cors"}
     let texto = await response.json();
 
-    /* for (let i = 0; i < texto.data.length; i++) {
-        arrayBolas.push(texto.data[i]);
-    } */
     topeMeteoritos = texto.count;
 
     let latitud = texto.data[num][3];
@@ -190,24 +208,26 @@ async function Meteoros(num) {
     let texto2 = await response.json();
 
     let datos = document.getElementById("datos");
+    datos.innerHTML="<h2>Datos del Cometa</h2>"
     let dato = document.createElement("table");
-    dato.innerHTML = "<tr><td>Momento impacto</td><td>" + texto.data[num][0] + "</td></tr>" +
-        "<tr><td>Energia </td><td>" + texto.data[num][1] + " J</td></tr>" +
-        "<tr><td>Energia del impacto</td><td>" + texto.data[num][2] + " J</td></tr>" +
-        "<tr><td>Latitud</td><td>" + texto.data[num][3] + " Grados</td></tr>" +
-        "<tr><td>Direccion Latitud</td><td>" + texto.data[num][4] + "</td></tr>" +
-        "<tr><td>Longitud</td><td>" + texto.data[num][5] + " Grados</td></tr>" +
-        "<tr><td>Direccion Longitud</td><td>" + texto.data[num][6] + "</td></tr>" +
-        "<tr><td>Altitud</td><td>" + texto.data[num][7] + " KM</td></tr>" +
-        "<tr><td>Velocidad</td><td>" + texto.data[num][8] + " m/s</td></tr>" +
-        "<tr><td>Tiempo</td><td>" + texto2.weather[0].main + "</td></tr>" +
-        "<tr><td>Velocidad del Viento</td><td>" + texto2.wind.speed + " Km/h</td></tr>" +
-        "<tr><td>Humedad</td><td>" + texto2.main.humidity + " %</td></tr>";
+    dato.innerHTML += "<tr><th class='encabezado'>DATOS</th><th class='encabezado'>VALORES</th></tr><tr><th>Momento del avistamiento</th><td>" + texto.data[num][0] + "</td></tr>" +
+        "<tr><th>Energia </th><td>" + texto.data[num][1] + " J</td></tr>" +
+        "<tr><th>Energia del impacto</th><td>" + texto.data[num][2] + " J</td></tr>" +
+        "<tr><th>Latitud</th><td>" + texto.data[num][3] + " Grados</td></tr>" +
+        "<tr><th>Direccion Latitud</th><td>" + texto.data[num][4] + "</td></tr>" +
+        "<tr><th>Longitud</th><td>" + texto.data[num][5] + " Grados</td></tr>" +
+        "<tr><th>Direccion Longitud</th><td>" + texto.data[num][6] + "</td></tr>" +
+        "<tr><th>Altitud</th><td>" + texto.data[num][7] + " KM</td></tr>" +
+        "<tr><th>Velocidad</th><td>" + texto.data[num][8] + " m/s</td></tr>" +
+        "<tr><th>Tiempo</th><td>" + texto2.weather[0].main + "</td></tr>" +
+        "<tr><th>Velocidad del Viento</th><td>" + texto2.wind.speed + " Km/h</td></tr>" +
+        "<tr><th>Humedad</th><td>" + texto2.main.humidity + " %</td></tr>";
 
 
     datos.appendChild(dato);
 
     //div mapa
+
     let map = L.map('map').setView([latitud, longitud], 3);
 
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -225,12 +245,13 @@ function borrar() {
     let cuerpo = document.getElementById("cuerpo");
     let body = document.getElementsByTagName("body");
     body[0].removeChild(cuerpo);
+    
     let nuevo = document.createElement("div");
     nuevo.id = "cuerpo";
     body[0].appendChild(nuevo);
 }
 
-function Crear() {
+function Crear(fecha) {
 
     let dia = fecha.getDate();
     let mes = fecha.getMonth() + 1;
@@ -262,7 +283,7 @@ function Crear() {
     let fechaUsuario = document.createElement("input");
     fechaUsuario.type = "date";
     fechaUsuario.id = "fechaUsuario";
-    fechaUsuario.classList.add("btnctr");
+    fechaUsuario.classList.add("date");
     cuerpo.appendChild(fechaUsuario);
 
     let nuevoBtn2 = document.createElement("input");
@@ -277,13 +298,14 @@ window.addEventListener("load", () => {
     let fotoDia = document.getElementById("btnFoto");
     let marte = document.getElementById("btnMarte");
 
-    let marteSelector = document.getElementById("selectMarte");
+    //let marteSelector = document.getElementById("selectMarte");
     let bolas = document.getElementById("btnBolas");
 
-    let cuerpo = document.getElementById("cuerpo");
+    //let cuerpo = document.getElementById("cuerpo");
 
     fotoDia.addEventListener("click", () => {
         borrar();
+
         let cuerpo2 = document.getElementById("cuerpo2");
 
         if (cuerpo2 != null) {
@@ -291,8 +313,10 @@ window.addEventListener("load", () => {
             let anterior = document.getElementById("anterior");
             let body = document.getElementsByTagName("body");
             body[0].removeChild(cuerpo2);
-            body[0].removeChild(siguiente);
-            body[0].removeChild(anterior);
+            if(siguiente!=null){
+                body[0].removeChild(siguiente);
+                body[0].removeChild(anterior);
+            }
         }
 
         let cuerpo = document.getElementById("cuerpo");
@@ -300,7 +324,7 @@ window.addEventListener("load", () => {
 
         fotoDiaNasa(fecha);
 
-        Crear();
+        Crear(fecha);
 
         let btnPrevio = document.getElementById("btnPrevio");
         let btnProximo = document.getElementById("btnProximo");
@@ -309,11 +333,12 @@ window.addEventListener("load", () => {
         btnBuscar.addEventListener("click", () => {
             let date = document.getElementById("fechaUsuario");
             let fecha = new Date(date.value);
-            let cuerpo = document.getElementById("cuerpo");
+            //let cuerpo = document.getElementById("cuerpo");
+            console.log(fecha);
 
             borrar();
 
-            Crear();
+            Crear(fecha);
 
             fotoDiaNasa(fecha);
         })
@@ -323,7 +348,7 @@ window.addEventListener("load", () => {
             fecha = new Date(milisegundos);
 
             borrar();
-            Crear();
+            Crear(fecha);
 
             fotoDia.dispatchEvent(evento);
             centinela = false;
@@ -339,7 +364,7 @@ window.addEventListener("load", () => {
 
                 if (cadena != cad) {
                     borrar();
-                    Crear();
+                    Crear(fecha);
                     fotoDia.dispatchEvent(evento);
                 } else {
                     btnProximo.style.disabled;
@@ -354,6 +379,43 @@ window.addEventListener("load", () => {
     marte.addEventListener("click", () => {
         borrar();
 
+        let body = document.getElementsByTagName("body");
+        let cuerpo2 = document.getElementById("cuerpo2");
+
+        if (cuerpo2 != null) {
+            let siguiente = document.getElementById("siguiente");
+            let anterior = document.getElementById("anterior");
+
+            body[0].removeChild(cuerpo2);
+        }
+
+        //let body = document.getElementsByTagName("body");
+        let nuevo = document.createElement("div");
+        nuevo.id = "cuerpo2";
+        body[0].appendChild(nuevo);
+
+        let anterior = document.createElement("input");
+        anterior.type = "button";
+        anterior.id = "anterior";
+        anterior.value = "<=";
+        anterior.classList.add("flechas");
+        body[0].appendChild(anterior);
+
+        let siguiente = document.createElement("input");
+        siguiente.type = "button";
+        siguiente.id = "siguiente";
+        siguiente.value = "=>";
+        siguiente.classList.add("flechas");
+        body[0].appendChild(siguiente);
+        Marte();
+        /* Marte(); */
+
+    })
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+    bolas.addEventListener("click", () => {
+        borrar();
         let cuerpo2 = document.getElementById("cuerpo2");
 
         if (cuerpo2 != null) {
@@ -365,37 +427,10 @@ window.addEventListener("load", () => {
             body[0].removeChild(anterior);
         }
 
-        let body = document.getElementsByTagName("body");
-        let nuevo = document.createElement("div");
-        nuevo.id = "cuerpo2";
-        body[0].appendChild(nuevo);
-
-        let anterior = document.createElement("input");
-        anterior.type = "button";
-        anterior.id = "anterior";
-        anterior.value = "<=";
-        body[0].appendChild(anterior);
-
-        let siguiente = document.createElement("input");
-        siguiente.type = "button";
-        siguiente.id = "siguiente";
-        siguiente.value = "=>";
-        body[0].appendChild(siguiente);
-        Marte();
-
-    })
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-    bolas.addEventListener("click", () => {
-        borrar();
-        let cuerpo2 = document.getElementById("cuerpo2");
-        let body = document.getElementsByTagName("body");
-        body[0].removeChild(cuerpo2);
-
         let cuerpo = document.getElementById("cuerpo");
         let padre = cuerpo.parentElement;
         let btndiv = document.createElement("div");
+        btndiv.id = "cuerpo2";
         btndiv.innerHTML = "<input type='button' class='btnizq' value='Anterior' id='anteriorMeteorito'>";
         btndiv.innerHTML += "<input type='button' class='btndrc' value='Siguiente' id='siguienteMeteorito'>";
         padre.appendChild(btndiv);
@@ -429,6 +464,7 @@ window.addEventListener("load", () => {
         });//boton siguiente
 
         Meteoros(meteorito);
+        //let body = document.getElementsByTagName("body");
     })
 
 

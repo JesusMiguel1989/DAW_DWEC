@@ -47,15 +47,63 @@ img{
 
 .btnizq{
     float: left;
+    font-weight: bold;
+    font-size: 20px;
+    border-radius: 15%;
+    margin-left: 5px;
+}
+
+.btnizq:hover{
+    background-color: blue;
+    color: white;
+    
 }
 
 .btndrc{
     float: right;
+    font-weight: bold;
+    font-size: 20px;
+    border-radius: 15%;
+    margin-right: 5px;
+}
+
+.btndrc:hover{
+    background-color: blue;
+    color: white;
 }
 
 .btnctr{
     position: relative;
     margin: 0 auto;
+    font-weight: bold;
+    font-size: 20px;
+    border-radius: 15%;
+}
+
+.btnctr:hover{
+    background-color: blue;
+    color: white;
+}
+
+.date{
+    font-size: 20px;
+    margin: 0 auto;
+}
+
+.date:hover{
+    border: 2px solid red;
+}
+
+.flechas{
+    position: relative;
+    margin: 0 auto;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.flechas:hover{
+    background-color: blue;
+    color: white;
 }
 
 .video{
@@ -63,14 +111,15 @@ img{
 }
 
 #map{
-    height: 270px;
+    height: 400px;
     margin-top: 5%;
-    padding-left: 5px;
+    left: 15%;
+    width: 50%;
 }
 
 #datos{
     float: left;
-    
+    margin-left: 5%;
 }
 
 #mapa{
@@ -91,4 +140,32 @@ img{
 
 #btnBuscar{
     display: block;
+}
+
+.titulo{
+    font-size: 25px;
+    font-weight: bold;
+}
+
+th{
+    font-size: 16px;
+}
+
+h2{
+    text-decoration: underline;
+    text-decoration-color: red;
+}
+
+table, tr, th, td{
+    border: 1px solid white;
+}
+
+tr,td,th{
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.encabezado{
+    background-color: white;
+    color: black;
 }
