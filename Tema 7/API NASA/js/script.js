@@ -38,6 +38,7 @@ async function fotoDiaNasa(fecha1) {
         //si es imagen hago un img y lo añado
         let nuevaFoto = document.createElement("img");
         nuevaFoto.src = texto.url;
+        nuevaFoto.alt="Foto del dia";
         cuerpo.appendChild(nuevaFoto);
     }
     if (texto.media_type == "video") {
@@ -46,6 +47,7 @@ async function fotoDiaNasa(fecha1) {
         nuevoVideo.src = texto.url;
         nuevoVideo.title = "YouTube video player"
         nuevoVideo.frameborder = "0"
+        nuevoVideo.alt="video del dia";
         nuevoVideo.width = "780px";
         nuevoVideo.height = "500px";
         nuevoVideo.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -194,6 +196,7 @@ async function Marte2(camara, fotomartebtn) {
     let img = texto2.photos[fotoMarte].img_src;
     let foto = document.createElement("img");
     foto.src = texto2.photos[fotomartebtn].img_src;
+    foto.alt="Foto de Marte";
     cuerpo.appendChild(foto);
 }
 
@@ -211,7 +214,7 @@ async function Meteoros(num) {
     cuerpo.appendChild(mapa);
 
     //pido informacion a la API
-    let response = await fetch("https://ssd-api.jpl.nasa.gov/fireball.api");
+    let response = await fetch("https://ssd-api.jpl.nasa.gov/fireball.api",{ headers:{'Access-Control-Allow-Origin' : 'http://127.0.0.1:5500/index.html'}});
     //,{ method:"get", mode:"no-cors"}
     let texto = await response.json();
 
@@ -327,20 +330,24 @@ window.addEventListener("load", () => {
 
     //execCommand('C:\Program Files\Google\Chrome\Application\chrome.exe', '--disable-web-security');
     //una vez que carga la página se trabaja con ella
-    let fotoDia = document.getElementById("btnFoto");
-    let marte = document.getElementById("btnMarte");
+    let fotoDia = document.getElementById("btnFoto");//boton de la pestaña
+    let marte = document.getElementById("btnMarte");//boton de la pestaña Marte
 
     //let marteSelector = document.getElementById("selectMarte");
-    let bolas = document.getElementById("btnBolas");
+    let bolas = document.getElementById("btnBolas");//boton pestaña cometas
 
     //let cuerpo = document.getElementById("cuerpo");
 
     fotoDia.addEventListener("click", () => {
         //se elige opcion foto del dia
+
+        //se elimina el div cuerpo1
         borrar();
 
+        //se busca el cuerpo 2
         let cuerpo2 = document.getElementById("cuerpo2");
 
+        //si existe se borra todo su cotenido
         if (cuerpo2 != null) {
             let siguiente = document.getElementById("siguiente");
             let anterior = document.getElementById("anterior");
@@ -359,35 +366,35 @@ window.addEventListener("load", () => {
 
         Crear(fecha);
 
-        let btnPrevio = document.getElementById("btnPrevio");
-        let btnProximo = document.getElementById("btnProximo");
-        let btnBuscar = document.getElementById("btnBuscar");
+        let btnPrevio = document.getElementById("btnPrevio");//boton de foto anterior
+        let btnProximo = document.getElementById("btnProximo");//boton de foto siguiente, estara bloqueado si es dia actual
+        let btnBuscar = document.getElementById("btnBuscar");//boton de buscar por fecha
 
         btnBuscar.addEventListener("click", () => {
+            //boton buscar
             let date = document.getElementById("fechaUsuario");
             let fecha = new Date(date.value);
             //let cuerpo = document.getElementById("cuerpo");
             console.log(fecha);
 
             borrar();
-
             Crear(fecha);
-
             fotoDiaNasa(fecha);
         })
 
         btnPrevio.addEventListener("click", () => {
+            //boton foto previa
             let milisegundos = fecha.getTime() - 1000 * 60 * 60 * 24;
             fecha = new Date(milisegundos);
 
             borrar();
             Crear(fecha);
-
             fotoDia.dispatchEvent(evento);
             centinela = false;
         })
 
         btnProximo.addEventListener("click", (e) => {
+            //boton siguiente, el centinela sirve para ver el dia actual
             if (!centinela) {
                 let fechaActual = new Date();
                 let cadena = fechaActual.getFullYear() + "-" + fechaActual.getMonth() + "-" + (fechaActual.getDate() + 1);
@@ -424,6 +431,7 @@ window.addEventListener("load", () => {
             body[0].removeChild(cuerpo2);
         }
 
+        //se crea el div donde estaran las fotos y los botones para poder navegar por ellas
         //let body = document.getElementsByTagName("body");
         let nuevo = document.createElement("div");
         nuevo.id = "cuerpo2";
@@ -432,14 +440,14 @@ window.addEventListener("load", () => {
         let anterior = document.createElement("input");
         anterior.type = "button";
         anterior.id = "anterior";
-        anterior.value = "<=";
+        anterior.value = "Previa";
         anterior.classList.add("flechas");
         body[0].appendChild(anterior);
 
         let siguiente = document.createElement("input");
         siguiente.type = "button";
         siguiente.id = "siguiente";
-        siguiente.value = "=>";
+        siguiente.value = "Siguiente";
         siguiente.classList.add("flechas");
         body[0].appendChild(siguiente);
         Marte();
@@ -447,7 +455,7 @@ window.addEventListener("load", () => {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     bolas.addEventListener("click", () => {
-        //opcion cometas
+        //opcion cometas, cargara el dato del ultimo cometa registrado
         borrar();
         let cuerpo2 = document.getElementById("cuerpo2");
 
@@ -460,6 +468,7 @@ window.addEventListener("load", () => {
             body[0].removeChild(anterior);
         }
 
+        //se crea el div para el mapa y datos del meteorito
         let cuerpo = document.getElementById("cuerpo");
         let padre = cuerpo.parentElement;
         let btndiv = document.createElement("div");
@@ -467,10 +476,6 @@ window.addEventListener("load", () => {
         btndiv.innerHTML = "<input type='button' class='btnizq' value='Anterior' id='anteriorMeteorito'>";
         btndiv.innerHTML += "<input type='button' class='btndrc' value='Siguiente' id='siguienteMeteorito'>";
         padre.appendChild(btndiv);
-
-
-        //creo un div para los datos
-
 
         //saco los id de los botones
         let anterior = document.getElementById("anteriorMeteorito");
