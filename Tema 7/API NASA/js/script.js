@@ -11,27 +11,37 @@ let fotomartebtn = 0;
 /*Revisar Meteoritos y marte*/
 
 async function fotoDiaNasa(fecha1) {
+    //esta funcion se mete en la API de la NASA para coger la foto del dia de la nasa, y las de dias anteriores
+    //cojo el elemento cuerpo del DOM
     let cuerpo = document.getElementById("cuerpo");
 
+    //hago que el objeto fecha global sea el mismo que el indicado en la pagina de la foto
     fecha=fecha1;
+    //saco el dia.mes y año de la foto
     let dia = fecha1.getDate();
     let mes = fecha1.getMonth() + 1;
     let year = fecha1.getFullYear();
 
+    //hago la peticion a la API de la nasa para que me devuelva la informacion de la foto de ese día en particular
     let response = await fetch("https://api.nasa.gov/planetary/apod?api_key=fBkefbv4EJ9jhvI7wBpSFbzpF2MPFegGAwXJfL2b&date=" + year + "-" + mes + "-" + dia);
     let texto = await response.json();
 
-
+    //reo un elemento h1 que se utilizara para poner el titulo de la foto
     let titulo = document.createElement("h1");
+    //establezco el textconten de la foto a lo que me devuelve la peticion (en este caso es title.)
     titulo.textContent = texto.title;
+    //añado el elemento al cuerpo
     cuerpo.appendChild(titulo);
 
+    //de la informacion devuelta por la promesa, sacoel tipo de archivo que es, si es video o imagen
     if (texto.media_type == "image") {
+        //si es imagen hago un img y lo añado
         let nuevaFoto = document.createElement("img");
         nuevaFoto.src = texto.url;
         cuerpo.appendChild(nuevaFoto);
     }
     if (texto.media_type == "video") {
+        //si es un video creo un elemento video y lo añado, le indico las dimensiones del reproductor
         let nuevoVideo = document.createElement("iframe");
         nuevoVideo.src = texto.url;
         nuevoVideo.title = "YouTube video player"
@@ -46,6 +56,7 @@ async function fotoDiaNasa(fecha1) {
 }
 
 async function Camaras() {
+    //esta funcion cuenta las fotos que tiene la nasa de las diferentes camaras del Curiosity.
     let response = await fetch("https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?sol=1000&api_key=fBkefbv4EJ9jhvI7wBpSFbzpF2MPFegGAwXJfL2b");
     let texto = await response.json();
 
@@ -60,6 +71,7 @@ async function Camaras() {
 }
 
 function dispositivo() {
+    //esta funcion convierte el acronimo de la camara en un numero, que se utilizara despues para saber la posicion en el array de camara
     let marteSelector = document.getElementById("selectMarte");
     //doy un valor a camara para saber que camara es y cuantas fotos tienen
     let camara;
@@ -86,15 +98,19 @@ function dispositivo() {
 }
 
 async function Marte() {
+    //funcion asincrona que busca las fotos de la camara seleccionada en la API
+    //cuento las fotos de cada camara 
     Camaras();
-    let cad = "";
-    //let cuerpo = document.getElementById("cuerpo");
+    let cad = "";//se usara para la insercion de las camaras
     let cuerpo2 = document.getElementById("cuerpo2");
+    //creo e inserto un elemento h1 que sera el titulo del campo
     let titulo = document.createElement("h1");
     titulo.textContent = "¿Que Camara del Curiosity quieres ver?";
     cuerpo2.appendChild(titulo);
 
+    //elimino el campo 1 por si estuviera de otro campo
     borrar();
+    //creo el elemento select donde estaran las camaras, estas se podran seleccionar
     let nuevoSelect = document.createElement("select");
 
     for (i = 0; i < arrayCamaras.length; i++) {
@@ -103,14 +119,15 @@ async function Marte() {
     nuevoSelect.innerHTML = cad;
     nuevoSelect.id = "selectMarte";
     cuerpo2.appendChild(nuevoSelect);
+
+    //los siguientes elementos seran los causantes de los eventos, botones o select
     let marteSelector = document.getElementById("selectMarte");
     let anterior = document.getElementById("anterior");
     let siguiente = document.getElementById("siguiente");
 
-    //doy un valor a camara para saber que camara es y cuantas fotos tienen
-
     let camara
     marteSelector.addEventListener("change", () => {
+        //se modifica el select y salta
         camara = dispositivo();
         fotomartebtn = 0;
         Marte2(camara, 0);
@@ -118,6 +135,7 @@ async function Marte() {
     })
 
     anterior.addEventListener("click", (e) => {
+        //este boton se usa para navegar dentro de las camaras elegidas
         if (fotomartebtn >= 1) {
             fotomartebtn--;
             Marte2(camara, fotomartebtn);
@@ -127,6 +145,7 @@ async function Marte() {
     })
 
     siguiente.addEventListener("click", (ev) => {
+        //este boton se usa para navegar dentro de las camaras elegidas
         if (fotomartebtn < arrayFotos[camara + 1]) {
             fotomartebtn++;
             Marte2(camara, fotomartebtn);
@@ -136,15 +155,17 @@ async function Marte() {
     })
 }
 
-/////////////////////////////////////////////////////////////////fotos de Marte
+/////fotos de Marte
 async function Marte2(camara, fotomartebtn) {
-
+    //hago la peticion a la api para sacar la foto que quiere el usuario, dandole la camara, y el numeor de la foto
     let response = await fetch("https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?sol=1000&api_key=fBkefbv4EJ9jhvI7wBpSFbzpF2MPFegGAwXJfL2b&camera=" + arrayCamaras[camara + 1]);
     let texto2 = await response.json();
 
+    //borro posibles campos de otras opcioens
     borrar();
     let cuerpo = document.getElementById("cuerpo");
 
+    //indico el nombre completo de la camara
     let nombre = document.createElement("h3");
     switch (arrayCamaras[camara + 1]) {
         case "FHAZ":
@@ -168,6 +189,8 @@ async function Marte2(camara, fotomartebtn) {
     }
     nombre.classList.add("titulo");
     cuerpo.appendChild(nombre);
+
+    //inserto el elemento foto
     let img = texto2.photos[fotoMarte].img_src;
     let foto = document.createElement("img");
     foto.src = texto2.photos[fotomartebtn].img_src;
@@ -175,7 +198,8 @@ async function Marte2(camara, fotomartebtn) {
 }
 
 async function Meteoros(num) {
-
+    
+    //funcion que pide informacion a la API de cneos que devuelve informacion d elos meteoritos avistados
     let nuevodiv = document.createElement("div");
     nuevodiv.id = "datos";
     nuevodiv.classList.add("datos");
@@ -186,12 +210,14 @@ async function Meteoros(num) {
     mapa.id = "map";
     cuerpo.appendChild(mapa);
 
+    //pido informacion a la API
     let response = await fetch("https://ssd-api.jpl.nasa.gov/fireball.api");
     //,{ method:"get", mode:"no-cors"}
     let texto = await response.json();
 
     topeMeteoritos = texto.count;
 
+    //saco la latitud y longitud y compruebo su direccion para saber si es positivo o negativo (coordenadas)
     let latitud = texto.data[num][3];
     if (texto.data[num][4] == "S") {
         latitud *= -1;
@@ -201,12 +227,15 @@ async function Meteoros(num) {
     if (texto.data[num][6] == "W") {
         longitud *= -1;
     }
-    let fecha = new Date(texto.data[num][0]);
-    console.log(fecha.getMinutes());
 
+    //pongo la fecha global a la fecha del avistamiento del meteorito
+    let fecha = new Date(texto.data[num][0]);
+
+    //hago una peticion a la API openWeather para sacar el tiempo que hacia en ese momento concreto
     response = await fetch("https://api.openweathermap.org/data/2.5/weather?lat=" + latitud + "&lon=" + longitud + "&appid=027c50a03ea971eac02eee0dd13efc1d&units=metric&dt=" + fecha.getTime() / 1000);
     let texto2 = await response.json();
 
+    //creo un div para insertar toda la informacion que se tiene del avistamiento
     let datos = document.getElementById("datos");
     datos.innerHTML="<h2>Datos del Cometa</h2>"
     let dato = document.createElement("table");
@@ -222,37 +251,36 @@ async function Meteoros(num) {
         "<tr><th>Tiempo</th><td>" + texto2.weather[0].main + "</td></tr>" +
         "<tr><th>Velocidad del Viento</th><td>" + texto2.wind.speed + " Km/h</td></tr>" +
         "<tr><th>Humedad</th><td>" + texto2.main.humidity + " %</td></tr>";
-
-
     datos.appendChild(dato);
 
-    //div mapa
-
+    //div mapa, "llama" a la "API" que muestra el mapa, al cual le paso las coordenadas del avistamiento, y el zoom que queremos
+    //el zoom puede ir desde 20 a 1, siendo 1 el mas alejado
     let map = L.map('map').setView([latitud, longitud], 3);
 
+    //llamamiento a la "API" del mapa
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 19,
         attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
     }).addTo(map);
 
-    //punto
+    //marcamos el punto exacto del avistamiento con una marca en el mapa
     let marker = L.marker([latitud, longitud]).addTo(map);
-
-
 }
 
 function borrar() {
+    //funcion que elimitna el div cuepor
     let cuerpo = document.getElementById("cuerpo");
     let body = document.getElementsByTagName("body");
     body[0].removeChild(cuerpo);
     
+    //lo vuelvo a crear para trabajar con el
     let nuevo = document.createElement("div");
     nuevo.id = "cuerpo";
     body[0].appendChild(nuevo);
 }
 
 function Crear(fecha) {
-
+    //funcion que crea los campos para la opcion foto del dia
     let dia = fecha.getDate();
     let mes = fecha.getMonth() + 1;
     let year = fecha.getFullYear();
@@ -280,6 +308,7 @@ function Crear(fecha) {
     nuevoBtn1.classList.add("btndrc");
     cuerpo.appendChild(nuevoBtn1);
 
+    //campo para poder indicar la fecha que se desea y su boton que busca dicho dia
     let fechaUsuario = document.createElement("input");
     fechaUsuario.type = "date";
     fechaUsuario.id = "fechaUsuario";
@@ -295,6 +324,9 @@ function Crear(fecha) {
 }
 
 window.addEventListener("load", () => {
+
+    //execCommand('C:\Program Files\Google\Chrome\Application\chrome.exe', '--disable-web-security');
+    //una vez que carga la página se trabaja con ella
     let fotoDia = document.getElementById("btnFoto");
     let marte = document.getElementById("btnMarte");
 
@@ -304,6 +336,7 @@ window.addEventListener("load", () => {
     //let cuerpo = document.getElementById("cuerpo");
 
     fotoDia.addEventListener("click", () => {
+        //se elige opcion foto del dia
         borrar();
 
         let cuerpo2 = document.getElementById("cuerpo2");
@@ -375,8 +408,10 @@ window.addEventListener("load", () => {
             }
         })
     })
+
     //////////////////////////////////////////////////////////////////////////////////////////////////////
     marte.addEventListener("click", () => {
+        //se elige la opcion de fotos de marte
         borrar();
 
         let body = document.getElementsByTagName("body");
@@ -408,13 +443,11 @@ window.addEventListener("load", () => {
         siguiente.classList.add("flechas");
         body[0].appendChild(siguiente);
         Marte();
-        /* Marte(); */
-
     })
     ////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-
     bolas.addEventListener("click", () => {
+        //opcion cometas
         borrar();
         let cuerpo2 = document.getElementById("cuerpo2");
 
@@ -466,6 +499,4 @@ window.addEventListener("load", () => {
         Meteoros(meteorito);
         //let body = document.getElementsByTagName("body");
     })
-
-
 })
